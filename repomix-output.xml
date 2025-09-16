@@ -1,0 +1,3009 @@
+This file is a merged representation of the entire codebase, combined into a single document by Repomix.
+
+<file_summary>
+This section contains a summary of this file.
+
+<purpose>
+This file contains a packed representation of the entire repository's contents.
+It is designed to be easily consumable by AI systems for analysis, code review,
+or other automated processes.
+</purpose>
+
+<file_format>
+The content is organized as follows:
+1. This summary section
+2. Repository information
+3. Directory structure
+4. Repository files (if enabled)
+5. Multiple file entries, each consisting of:
+  - File path as an attribute
+  - Full contents of the file
+</file_format>
+
+<usage_guidelines>
+- This file should be treated as read-only. Any changes should be made to the
+  original repository files, not this packed version.
+- When processing this file, use the file path to distinguish
+  between different files in the repository.
+- Be aware that this file may contain sensitive information. Handle it with
+  the same level of security as you would the original repository.
+</usage_guidelines>
+
+<notes>
+- Some files may have been excluded based on .gitignore rules and Repomix's configuration
+- Binary files are not included in this packed representation. Please refer to the Repository Structure section for a complete list of file paths, including binary files
+- Files matching patterns in .gitignore are excluded
+- Files matching default ignore patterns are excluded
+- Files are sorted by Git change count (files with more changes are at the bottom)
+</notes>
+
+</file_summary>
+
+<directory_structure>
+public/
+  index.html
+  manifest.json
+  robots.txt
+src/
+  components/
+    ChatInterface.css
+    ChatInterface.js
+    DataCard.css
+    DataCard.js
+    LanguageToggle.css
+    LanguageToggle.js
+    MessageBubble.css
+    MessageBubble.js
+    QuickActions.css
+    QuickActions.js
+    TypingIndicator.css
+    TypingIndicator.js
+  utils/
+    demoData.js
+  App.css
+  App.js
+  App.test.js
+  i18n.js
+  index.css
+  index.js
+  logo.svg
+  reportWebVitals.js
+  service-worker.js
+  serviceWorkerRegistration.js
+  setupTests.js
+.gitignore
+package.json
+README_ENHANCED.md
+README.md
+</directory_structure>
+
+<files>
+This section contains the contents of the repository's files.
+
+<file path="public/index.html">
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#3498db" />
+    <meta name="description" content="JalBuddy - AI-powered groundwater information system for farmers and rural communities" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <!--
+      manifest.json provides metadata used when your web app is installed on a
+      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
+    -->
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <!--
+      Notice the use of %PUBLIC_URL% in the tags above.
+      It will be replaced with the URL of the `public` folder during the build.
+      Only files inside the `public` folder can be referenced from the HTML.
+
+      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
+      work correctly both with client-side routing and a non-root public URL.
+      Learn how to configure a non-root public URL by running `npm run build`.
+    -->
+    <title>JalBuddy - Groundwater Information Assistant</title>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+    <!--
+      This HTML file is a template.
+      If you open it directly in the browser, you will see an empty page.
+
+      You can add webfonts, meta tags, or analytics to this file.
+      The build step will place the bundled scripts into the <body> tag.
+
+      To begin the development, run `npm start` or `yarn start`.
+      To create a production bundle, use `npm run build` or `yarn build`.
+    -->
+  </body>
+</html>
+</file>
+
+<file path="public/manifest.json">
+{
+  "short_name": "JalBuddy",
+  "name": "JalBuddy - Groundwater Information Assistant",
+  "icons": [
+    {
+      "src": "favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "logo192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "logo512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#3498db",
+  "background_color": "#667eea",
+  "description": "AI-powered groundwater information system for farmers and rural communities"
+}
+</file>
+
+<file path="public/robots.txt">
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Disallow:
+</file>
+
+<file path="src/components/ChatInterface.css">
+.chat-interface {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  max-width: 1000px;
+  margin: 0 auto;
+  background: linear-gradient(135deg, #0f4c81 0%, #1e6ba8 50%, #2980b9 100%);
+  font-family: 'Arial', 'Helvetica', sans-serif;
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  border: 2px solid #e67e22;
+}
+
+.chat-interface::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="0.5" fill="%23ffffff" opacity="0.05"/><circle cx="80" cy="40" r="0.3" fill="%23ffffff" opacity="0.03"/><circle cx="40" cy="80" r="0.4" fill="%23ffffff" opacity="0.04"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+  pointer-events: none;
+  animation: float 20s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  33% { transform: translateY(-10px) rotate(1deg); }
+  66% { transform: translateY(5px) rotate(-1deg); }
+}
+
+.chat-header {
+  background: linear-gradient(90deg, #0f4c81 0%, #1e6ba8 100%);
+  padding: 1rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 3px solid #e67e22;
+  border-radius: 12px 12px 0 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  position: relative;
+  z-index: 10;
+  animation: slideDown 0.6s ease-out;
+}
+
+.chat-header::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: linear-gradient(180deg, #e67e22 0%, #d35400 100%);
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.header-left h1 {
+  margin: 0;
+  color: #ffffff;
+  font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.header-left h1::before {
+  content: '🏛️';
+  font-size: 1.5rem;
+}
+
+.header-left .subtitle {
+  color: #f8f9fa;
+  font-size: 0.85rem;
+  font-weight: 500;
+  margin-top: 0.3rem;
+  opacity: 0.9;
+  animation: fadeInUp 0.8s ease-out 0.3s both;
+}
+
+.government-badge {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 0.2rem 0.6rem;
+  border-radius: 8px;
+  font-size: 0.7rem;
+  color: #fff;
+  font-weight: 600;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+@keyframes fadeInUp {
+  from {
+    transform: translateY(10px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 0.8;
+  }
+}
+
+.header-right {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.voice-toggle {
+  background: none;
+  border: 1px solid #bdc3c7;
+  border-radius: 50%;
+  padding: 0.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: #7f8c8d;
+}
+
+.voice-toggle:hover {
+  background: rgba(52, 152, 219, 0.1);
+  border-color: #3498db;
+  color: #3498db;
+}
+
+.voice-toggle.enabled {
+  background: #3498db;
+  border-color: #3498db;
+  color: white;
+}
+
+.messages-container {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.95);
+  position: relative;
+  scroll-behavior: smooth;
+}
+
+.welcome-animation {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  animation: welcomeFadeIn 1s ease-out;
+}
+
+.welcome-pulse {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #3498db, #2980b9, #1f618d);
+  animation: welcomePulse 2s ease-in-out infinite;
+  margin-bottom: 1rem;
+  box-shadow: 0 8px 32px rgba(52, 152, 219, 0.4);
+  position: relative;
+}
+
+.welcome-pulse::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  animation: innerPulse 2s ease-in-out infinite;
+}
+
+.welcome-text {
+  font-size: 1.5rem;
+  font-weight: 600;
+  background: linear-gradient(135deg, #2c3e50, #3498db);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-align: center;
+  animation: welcomeTextFloat 3s ease-in-out infinite;
+  letter-spacing: 0.5px;
+}
+
+@keyframes welcomeFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes welcomePulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 8px 32px rgba(52, 152, 219, 0.4);
+  }
+  50% {
+    transform: scale(1.1);
+    box-shadow: 0 12px 48px rgba(52, 152, 219, 0.6);
+  }
+}
+
+@keyframes innerPulse {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.3;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.2);
+    opacity: 0.1;
+  }
+}
+
+@keyframes welcomeTextFloat {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+.input-container {
+  background: #f8f9fa;
+  padding: 1.2rem 1.5rem;
+  border-top: 3px solid #e67e22;
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 10;
+  border-radius: 0 0 12px 12px;
+}
+
+.input-wrapper {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.5rem;
+  max-width: 100%;
+}
+
+.message-input {
+  flex: 1;
+  border: 2px solid #dee2e6;
+  border-radius: 8px;
+  padding: 0.8rem 1rem;
+  font-size: 0.95rem;
+  resize: none;
+  outline: none;
+  transition: all 0.3s ease;
+  font-family: inherit;
+  font-weight: 400;
+  min-height: 20px;
+  max-height: 120px;
+  background: #ffffff;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.message-input:focus {
+  border-color: #1e6ba8;
+  box-shadow: 
+    0 0 0 3px rgba(30, 107, 168, 0.1),
+    inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  background: #ffffff;
+}
+
+.message-input::placeholder {
+  color: #95a5a6;
+  font-style: italic;
+}
+
+.input-actions {
+  display: flex;
+  gap: 0.8rem;
+  align-items: center;
+}
+
+.mic-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.mic-button, .send-button {
+  border: none;
+  border-radius: 50%;
+  padding: 1rem;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.mic-button::before, .send-button::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  transition: all 0.6s ease;
+  transform: translate(-50%, -50%);
+}
+
+.mic-button:hover::before, .send-button:hover::before {
+  width: 120%;
+  height: 120%;
+}
+
+.mic-button {
+  background: linear-gradient(135deg, #6c757d, #495057);
+  color: white;
+}
+
+.mic-button:hover {
+  background: linear-gradient(135deg, #495057, #343a40);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.mic-button.listening {
+  background: linear-gradient(135deg, #e67e22, #d35400);
+  animation: pulseRecord 1.2s ease-in-out infinite;
+  box-shadow: 0 0 0 0 rgba(230, 126, 34, 0.7);
+}
+
+.mic-button.listening::after {
+  content: '';
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  right: -4px;
+  bottom: -4px;
+  border: 2px solid rgba(231, 76, 60, 0.5);
+  border-radius: 50%;
+  animation: recordingRing 1.2s ease-in-out infinite;
+}
+
+@keyframes pulseRecord {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(231, 76, 60, 0.7), 0 4px 16px rgba(0, 0, 0, 0.15);
+  }
+  50% {
+    transform: scale(1.08);
+    box-shadow: 0 0 0 8px rgba(231, 76, 60, 0.3), 0 8px 24px rgba(231, 76, 60, 0.3);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(231, 76, 60, 0), 0 4px 16px rgba(0, 0, 0, 0.15);
+  }
+}
+
+@keyframes recordingRing {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.4);
+    opacity: 0;
+  }
+}
+
+.send-button {
+  background: linear-gradient(135deg, #1e6ba8, #0f4c81);
+  color: white;
+}
+
+.send-button:hover:not(:disabled) {
+  background: linear-gradient(135deg, #0f4c81, #0a3d6b);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(30, 107, 168, 0.3);
+}
+
+.send-button:active:not(:disabled) {
+  transform: translateY(0px);
+  box-shadow: 0 2px 8px rgba(30, 107, 168, 0.2);
+}
+
+.send-button:disabled {
+  background: linear-gradient(135deg, #adb5bd, #868e96);
+  cursor: not-allowed;
+  opacity: 0.6;
+  transform: none;
+}
+
+/* Voice Waveform Animation */
+.voice-waveform {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  height: 40px;
+  animation: waveformFadeIn 0.3s ease-out;
+}
+
+.wave-bar {
+  width: 3px;
+  background: linear-gradient(to top, #e74c3c, #c0392b);
+  border-radius: 2px;
+  animation: waveAnimation 1.2s ease-in-out infinite;
+  transform-origin: bottom;
+}
+
+.wave-bar:nth-child(1) {
+  height: 20px;
+  animation-delay: 0s;
+}
+
+.wave-bar:nth-child(2) {
+  height: 35px;
+  animation-delay: 0.1s;
+}
+
+.wave-bar:nth-child(3) {
+  height: 15px;
+  animation-delay: 0.2s;
+}
+
+.wave-bar:nth-child(4) {
+  height: 30px;
+  animation-delay: 0.3s;
+}
+
+.wave-bar:nth-child(5) {
+  height: 25px;
+  animation-delay: 0.4s;
+}
+
+@keyframes waveformFadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes waveAnimation {
+  0%, 100% {
+    transform: scaleY(1);
+    opacity: 0.7;
+  }
+  50% {
+    transform: scaleY(0.3);
+    opacity: 1;
+  }
+}
+
+/* Scrollbar styling */
+.messages-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.messages-container::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+}
+
+.messages-container::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 3px;
+}
+
+.messages-container::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .chat-interface {
+    height: 100vh;
+    max-width: 100%;
+  }
+  
+  .chat-header {
+    padding: 1rem;
+  }
+  
+  .header-left h1 {
+    font-size: 1.5rem;
+  }
+  
+  .header-left .subtitle {
+    font-size: 0.8rem;
+  }
+  
+  .input-container {
+    padding: 1rem;
+  }
+  
+  .messages-container {
+    padding: 0.5rem;
+  }
+}
+</file>
+
+<file path="src/components/ChatInterface.js">
+import React, { useState, useRef, useEffect } from 'react';
+import { Mic, MicOff, Send, Volume2, VolumeX } from 'lucide-react';
+import MessageBubble from './MessageBubble';
+import LanguageToggle from './LanguageToggle';
+import TypingIndicator from './TypingIndicator';
+import QuickActions from './QuickActions';
+import { demoIntents } from '../utils/demoData';
+import './ChatInterface.css';
+
+const ChatInterface = () => {
+  const [messages, setMessages] = useState([]);
+  const [inputText, setInputText] = useState('');
+  const [isListening, setIsListening] = useState(false);
+  const [voiceEnabled, setVoiceEnabled] = useState(true);
+  const [language, setLanguage] = useState('en');
+  const [isTyping, setIsTyping] = useState(false);
+  const [showWelcome, setShowWelcome] = useState(true);
+  const [showQuickActions, setShowQuickActions] = useState(false);
+
+  const messagesEndRef = useRef(null);
+  const recognitionRef = useRef(null);
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
+
+  // Initialize welcome message
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      const welcomeText = language === 'hi' 
+        ? "नमस्ते! मैं जलबडी हूँ, भूजल जानकारी के लिए आपका AI सहायक। आज मैं आपकी कैसे मदद कर सकता हूँ? 🌊"
+        : "Hello! I'm JalBuddy, your AI assistant for groundwater information. How can I help you today? 🌊";
+      
+      const welcomeMessage = {
+        id: 1,
+        text: welcomeText,
+        sender: 'bot',
+        timestamp: new Date()
+      };
+      setMessages([welcomeMessage]);
+      setShowWelcome(false);
+      setShowQuickActions(true);
+      
+      if (voiceEnabled) {
+        setTimeout(() => {
+          speakText(welcomeMessage.text);
+        }, 800);
+      }
+    }, 1500);
+
+    return () => clearTimeout(timer);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // Initialize speech recognition
+  useEffect(() => {
+    if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      recognitionRef.current = new SpeechRecognition();
+      recognitionRef.current.continuous = false;
+      recognitionRef.current.interimResults = false;
+      recognitionRef.current.lang = language === 'hi' ? 'hi-IN' : 'en-US';
+
+      recognitionRef.current.onresult = (event) => {
+        const transcript = event.results[0][0].transcript;
+        setInputText(transcript);
+        setIsListening(false);
+      };
+
+      recognitionRef.current.onerror = () => {
+        setIsListening(false);
+      };
+
+      recognitionRef.current.onend = () => {
+        setIsListening(false);
+      };
+    }
+  }, [language]);
+
+  const handleSendMessage = () => {
+    if (inputText.trim() === '' || isTyping) return;
+
+    const userMessageText = inputText;
+    const newMessage = {
+      id: Date.now(),
+      text: userMessageText,
+      sender: 'user',
+      timestamp: new Date()
+    };
+
+    setMessages(prev => [...prev, newMessage]);
+    setInputText('');
+    setIsTyping(true);
+    
+    // Simulate bot thinking time (1.5-2.5 seconds)
+    const thinkingTime = 1500 + Math.random() * 1000;
+    
+    setTimeout(() => {
+      const botResponse = generateBotResponse(userMessageText);
+      const botMessage = {
+        id: Date.now() + 1,
+        text: botResponse,
+        sender: 'bot',
+        timestamp: new Date()
+      };
+      setMessages(prev => [...prev, botMessage]);
+      setIsTyping(false);
+      
+      // Text-to-speech for bot response
+      if (voiceEnabled) {
+        setTimeout(() => {
+          speakText(botResponse);
+        }, 300);
+      }
+    }, thinkingTime);
+  };
+
+  const handleQuickAction = (actionKey) => {
+    const intentData = demoIntents[actionKey];
+    const langData = intentData[language];
+    
+    // Add user message
+    const userMessage = {
+      id: Date.now(),
+      text: langData.userQuery,
+      sender: 'user',
+      timestamp: new Date()
+    };
+    
+    setMessages(prev => [...prev, userMessage]);
+    setIsTyping(true);
+    setShowQuickActions(false);
+    
+    // Show bot response with data card after delay
+    setTimeout(() => {
+      const botMessage = {
+        id: Date.now() + 1,
+        text: `${language === 'hi' ? 'यहाँ आपके लिए जानकारी है:' : 'Here\'s the information you requested:'}`,
+        sender: 'bot',
+        timestamp: new Date(),
+        dataCard: {
+          title: langData.title,
+          summary: langData.summary,
+          details: langData.details,
+          suggestion: langData.suggestion,
+          color: getColorForIntent(actionKey)
+        }
+      };
+      
+      setMessages(prev => [...prev, botMessage]);
+      setIsTyping(false);
+      
+      if (voiceEnabled) {
+        setTimeout(() => {
+          speakText(botMessage.text);
+        }, 300);
+      }
+    }, 2000 + Math.random() * 1000);
+  };
+  
+  const getColorForIntent = (intent) => {
+    const colors = {
+      groundwater: '#3498db',
+      rainfall: '#2ecc71',
+      boring: '#e67e22',
+      quality: '#9b59b6',
+      gec: '#e74c3c',
+      dwlr: '#1abc9c'
+    };
+    return colors[intent] || '#3498db';
+  };
+
+  const generateBotResponse = (userMessage) => {
+    const lowerMessage = userMessage.toLowerCase();
+    
+    if (lowerMessage.includes('भूजल') || lowerMessage.includes('groundwater') || lowerMessage.includes('water level')) {
+      return language === 'hi' 
+        ? "मैं आपकी भूजल जानकारी में मदद कर सकता हूँ! क्या आप किसी विशिष्ट क्षेत्र में जल स्तर, गुणवत्ता या उपलब्धता के बारे में डेटा चाहते हैं? कृपया अपना स्थान या जिला बताएं।"
+        : "I can help you with groundwater information! Are you looking for data about water levels, quality, or availability in a specific area? Please specify your location or district.";
+    } else if (lowerMessage.includes('वर्षा') || lowerMessage.includes('मानसून') || lowerMessage.includes('rainfall') || lowerMessage.includes('monsoon')) {
+      return language === 'hi'
+        ? "वर्षा डेटा भूजल रिचार्ज के लिए महत्वपूर्ण है। मैं मौसमी पैटर्न और भूजल स्तर पर उनके प्रभाव के बारे में जानकारी प्रदान कर सकता हूँ। आप किस क्षेत्र में रुचि रखते हैं?"
+        : "Rainfall data is crucial for groundwater recharge. I can provide information about seasonal patterns and their impact on groundwater levels. Which region are you interested in?";
+    } else if (lowerMessage.includes('बोरिंग') || lowerMessage.includes('boring') || lowerMessage.includes('drilling')) {
+      return language === 'hi'
+        ? "बोरिंग/ड्रिलिंग जानकारी के लिए, मैं भूजल डेटा, भूवैज्ञानिक सर्वेक्षण और आपके क्षेत्र में सफलता दर के आधार पर इष्टतम स्थानों पर मार्गदर्शन कर सकता हूँ। आपका स्थान क्या है?"
+        : "For boring/drilling information, I can guide you on optimal locations based on groundwater data, geological surveys, and success rates in your area. What's your location?";
+    } else if (lowerMessage.includes('गुणवत्ता') || lowerMessage.includes('quality') || lowerMessage.includes('contamination')) {
+      return language === 'hi'
+        ? "पानी की गुणवत्ता सुरक्षित उपभोग के लिए आवश्यक है। मैं आपके क्षेत्र के लिए भूजल गुणवत्ता पैरामीटर, दूषण स्तर और उपचार सिफारिशों के बारे में जानकारी प्रदान कर सकता हूँ।"
+        : "Water quality is essential for safe consumption. I can provide information about groundwater quality parameters, contamination levels, and treatment recommendations for your area.";
+    } else {
+      return language === 'hi'
+        ? "मैं समझता हूँ कि आप भूजल संबंधी जानकारी चाह रहे हैं। आप मुझसे जल स्तर, गुणवत्ता, वर्षा प्रभाव, बोरिंग स्थान या कोई अन्य भूजल प्रश्न पूछ सकते हैं। मैं विशेष रूप से आपकी कैसे सहायता कर सकता हूँ?"
+        : "I understand you're looking for groundwater-related information. You can ask me about water levels, quality, rainfall impact, boring locations, or any other groundwater queries. How specifically can I assist you?";
+    }
+  };
+
+  const speakText = (text) => {
+    if ('speechSynthesis' in window) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = language === 'hi' ? 'hi-IN' : 'en-US';
+      utterance.rate = 0.9;
+      utterance.pitch = 1;
+      window.speechSynthesis.speak(utterance);
+    }
+  };
+
+  const toggleListening = () => {
+    if (isListening) {
+      recognitionRef.current?.stop();
+      setIsListening(false);
+    } else {
+      if (recognitionRef.current) {
+        recognitionRef.current.start();
+        setIsListening(true);
+      } else {
+        alert('Speech recognition not supported in this browser');
+      }
+    }
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      handleSendMessage();
+    }
+  };
+
+  return (
+    <div className="chat-interface">
+      <div className="chat-header">
+        <div className="header-left">
+          <h1>JalBuddy AI Assistant</h1>
+          <span className="subtitle">
+            {language === 'hi' ? 'केंद्रीय भूजल बोर्ड | भारत सरकार' : 'Central Ground Water Board | Government of India'}
+          </span>
+          <span className="government-badge">
+            {language === 'hi' ? 'आधिकारिक' : 'OFFICIAL'}
+          </span>
+        </div>
+        <div className="header-right">
+          <button
+            className={`voice-toggle ${voiceEnabled ? 'enabled' : ''}`}
+            onClick={() => setVoiceEnabled(!voiceEnabled)}
+            title={voiceEnabled ? 'Disable voice output' : 'Enable voice output'}
+          >
+            {voiceEnabled ? <Volume2 size={16} /> : <VolumeX size={16} />}
+          </button>
+          <LanguageToggle language={language} onLanguageChange={setLanguage} />
+        </div>
+      </div>
+
+      <div className="messages-container">
+        {showWelcome && (
+          <div className="welcome-animation">
+            <div className="welcome-pulse"></div>
+            <div className="welcome-text">Welcome to JalBuddy! 🌊</div>
+          </div>
+        )}
+        {messages.map((message) => (
+          <MessageBubble key={message.id} message={message} />
+        ))}
+        {showQuickActions && (
+          <QuickActions 
+            language={language} 
+            onActionClick={handleQuickAction} 
+            isVisible={showQuickActions} 
+          />
+        )}
+        {isTyping && <TypingIndicator />}
+        <div ref={messagesEndRef} />
+      </div>
+
+      <div className="input-container">
+        <div className="input-wrapper">
+          <textarea
+            value={inputText}
+            onChange={(e) => setInputText(e.target.value)}
+            onKeyPress={handleKeyPress}
+            placeholder={language === 'hi' ? 'यहाँ अपना प्रश्न लिखें...' : 'Type your groundwater query here...'}
+            rows={1}
+            className="message-input"
+          />
+          <div className="input-actions">
+            <div className="mic-container">
+              <button
+                className={`mic-button ${isListening ? 'listening' : ''}`}
+                onClick={toggleListening}
+                title={isListening ? 'Stop recording' : 'Start voice input'}
+              >
+                {isListening ? <MicOff size={20} /> : <Mic size={20} />}
+              </button>
+              {isListening && (
+                <div className="voice-waveform">
+                  <div className="wave-bar"></div>
+                  <div className="wave-bar"></div>
+                  <div className="wave-bar"></div>
+                  <div className="wave-bar"></div>
+                  <div className="wave-bar"></div>
+                </div>
+              )}
+            </div>
+            <button
+              className="send-button"
+              onClick={handleSendMessage}
+              disabled={inputText.trim() === '' || isTyping}
+              title="Send message"
+            >
+              <Send size={20} />
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default ChatInterface;
+</file>
+
+<file path="src/components/DataCard.css">
+.data-card {
+  background: rgba(255, 255, 255, 0.98);
+  border-radius: 16px;
+  padding: 1.2rem;
+  margin: 0.5rem 0;
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.12),
+    0 4px 16px rgba(0, 0, 0, 0.08);
+  position: relative;
+  overflow: hidden;
+  animation: cardSlideIn 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.data-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--card-color), rgba(255, 255, 255, 0.1));
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 0.8rem;
+}
+
+.card-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #2c3e50;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.card-status {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  background: rgba(46, 204, 113, 0.1);
+  color: #27ae60;
+  padding: 0.3rem 0.6rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border: 1px solid rgba(46, 204, 113, 0.2);
+}
+
+.card-summary {
+  background: linear-gradient(135deg, rgba(52, 152, 219, 0.1), rgba(155, 89, 182, 0.05));
+  border-left: 4px solid var(--card-color);
+  padding: 1rem;
+  margin: 0.8rem 0;
+  border-radius: 0 12px 12px 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #2c3e50;
+  line-height: 1.4;
+}
+
+.card-details {
+  display: grid;
+  gap: 0.6rem;
+  margin: 1rem 0;
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0.8rem;
+  background: rgba(236, 240, 241, 0.5);
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+.detail-row:hover {
+  background: rgba(52, 152, 219, 0.1);
+  transform: translateX(4px);
+}
+
+.detail-label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #7f8c8d;
+}
+
+.detail-value {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #2c3e50;
+  text-align: right;
+}
+
+.card-suggestion {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(241, 196, 15, 0.1);
+  border: 1px solid rgba(241, 196, 15, 0.3);
+  color: #d68910;
+  padding: 0.8rem;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  margin: 1rem 0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.card-suggestion:hover {
+  background: rgba(241, 196, 15, 0.2);
+  transform: translateY(-1px);
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(189, 195, 199, 0.3);
+  margin-top: 1rem;
+}
+
+.data-source {
+  font-size: 0.75rem;
+  color: #95a5a6;
+  font-weight: 500;
+}
+
+.powered-by {
+  font-size: 0.75rem;
+  color: var(--card-color);
+  font-weight: 600;
+  background: rgba(52, 152, 219, 0.1);
+  padding: 0.3rem 0.6rem;
+  border-radius: 8px;
+}
+
+@keyframes cardSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .data-card {
+    padding: 1rem;
+    border-radius: 12px;
+  }
+  
+  .card-header {
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: flex-start;
+  }
+  
+  .card-title {
+    font-size: 1rem;
+  }
+  
+  .detail-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.3rem;
+  }
+  
+  .detail-value {
+    text-align: left;
+    font-size: 0.85rem;
+  }
+  
+  .card-footer {
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: flex-start;
+  }
+}
+</file>
+
+<file path="src/components/DataCard.js">
+import React from 'react';
+import { ExternalLink, CheckCircle } from 'lucide-react';
+import './DataCard.css';
+
+const DataCard = ({ title, summary, details, suggestion, color = '#3498db' }) => {
+  return (
+    <div className="data-card" style={{ '--card-color': color }}>
+      <div className="card-header">
+        <div className="card-title">{title}</div>
+        <div className="card-status">
+          <CheckCircle size={16} />
+          <span>Live Data</span>
+        </div>
+      </div>
+      
+      <div className="card-summary">
+        {summary}
+      </div>
+      
+      <div className="card-details">
+        {details.map((detail, index) => (
+          <div key={index} className="detail-row">
+            <span className="detail-label">{detail.label}:</span>
+            <span className="detail-value">{detail.value}</span>
+          </div>
+        ))}
+      </div>
+      
+      {suggestion && (
+        <div className="card-suggestion">
+          <ExternalLink size={14} />
+          <span>{suggestion}</span>
+        </div>
+      )}
+      
+      <div className="card-footer">
+        <div className="data-source">Source: INGRES API • CGWB Database</div>
+        <div className="powered-by">Powered by JalBuddy AI</div>
+      </div>
+    </div>
+  );
+};
+
+export default DataCard;
+</file>
+
+<file path="src/components/LanguageToggle.css">
+.language-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: none;
+  border: 1px solid #bdc3c7;
+  border-radius: 20px;
+  padding: 0.5rem 0.8rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: #7f8c8d;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.language-toggle:hover {
+  background: rgba(52, 152, 219, 0.1);
+  border-color: #3498db;
+  color: #3498db;
+}
+
+.language-toggle.en {
+  background: linear-gradient(135deg, #3498db, #2980b9);
+  border-color: #3498db;
+  color: white;
+}
+
+.language-toggle.hi {
+  background: linear-gradient(135deg, #e67e22, #d35400);
+  border-color: #e67e22;
+  color: white;
+}
+
+.language-text {
+  font-size: 0.8rem;
+  letter-spacing: 0.5px;
+  min-width: 20px;
+  text-align: center;
+}
+
+/* Animation for smooth transitions */
+.language-toggle * {
+  transition: all 0.3s ease;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .language-toggle {
+    padding: 0.4rem 0.6rem;
+    font-size: 0.8rem;
+  }
+  
+  .language-text {
+    font-size: 0.75rem;
+  }
+}
+</file>
+
+<file path="src/components/LanguageToggle.js">
+import React from 'react';
+import { Globe } from 'lucide-react';
+import './LanguageToggle.css';
+
+const LanguageToggle = ({ language, onLanguageChange }) => {
+  const toggleLanguage = () => {
+    const newLanguage = language === 'en' ? 'hi' : 'en';
+    onLanguageChange(newLanguage);
+  };
+
+  return (
+    <button 
+      className={`language-toggle ${language}`}
+      onClick={toggleLanguage}
+      title={`Switch to ${language === 'en' ? 'Hindi' : 'English'}`}
+    >
+      <Globe size={16} />
+      <span className="language-text">
+        {language === 'en' ? 'EN' : 'हिं'}
+      </span>
+    </button>
+  );
+};
+
+export default LanguageToggle;
+</file>
+
+<file path="src/components/MessageBubble.css">
+.message-bubble {
+  display: flex;
+  margin-bottom: 1.5rem;
+  align-items: flex-start;
+  gap: 1rem;
+  animation: slideInMessage 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes slideInMessage {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.bot-message {
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.user-message {
+  flex-direction: row-reverse;
+  justify-content: flex-start;
+}
+
+.message-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  position: relative;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease;
+}
+
+.message-avatar:hover {
+  transform: scale(1.05);
+}
+
+.bot-message .message-avatar {
+  background: linear-gradient(135deg, #3498db, #2980b9, #1f618d);
+  color: white;
+  border: 3px solid rgba(255, 255, 255, 0.2);
+}
+
+.bot-message .message-avatar::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(135deg, #3498db, #2980b9);
+  border-radius: 50%;
+  z-index: -1;
+  opacity: 0.3;
+  animation: gentlePulse 3s ease-in-out infinite;
+}
+
+.user-message .message-avatar {
+  background: linear-gradient(135deg, #2ecc71, #27ae60, #1e8449);
+  color: white;
+  border: 3px solid rgba(255, 255, 255, 0.2);
+}
+
+.user-message .message-avatar::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(135deg, #2ecc71, #27ae60);
+  border-radius: 50%;
+  z-index: -1;
+  opacity: 0.3;
+  animation: gentlePulse 3s ease-in-out infinite 1.5s;
+}
+
+@keyframes gentlePulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.3;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.1;
+  }
+}
+
+.bot-icon, .user-icon {
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+  transition: transform 0.3s ease;
+}
+
+.message-content {
+  max-width: 75%;
+  position: relative;
+  transition: transform 0.2s ease;
+}
+
+.message-content:hover {
+  transform: translateY(-1px);
+}
+
+.bot-message .message-content {
+  background: rgba(255, 255, 255, 0.98);
+  border-radius: 20px 20px 20px 6px;
+  color: #2c3e50;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.user-message .message-content {
+  background: linear-gradient(135deg, #3498db, #2980b9, #1f618d);
+  border-radius: 20px 20px 6px 20px;
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.message-text {
+  padding: 1rem 1.4rem;
+  line-height: 1.6;
+  word-wrap: break-word;
+  font-size: 1rem;
+  font-weight: 400;
+  letter-spacing: 0.2px;
+}
+
+.message-timestamp {
+  font-size: 0.75rem;
+  padding: 0 1.4rem 0.8rem;
+  opacity: 0.6;
+  font-weight: 500;
+  transition: opacity 0.3s ease;
+}
+
+.message-content:hover .message-timestamp {
+  opacity: 0.8;
+}
+
+.bot-message .message-timestamp {
+  color: #8e9aaf;
+}
+
+.user-message .message-timestamp {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* Enhanced message bubble shadows */
+.bot-message .message-content {
+  box-shadow: 
+    0 4px 20px rgba(0, 0, 0, 0.08),
+    0 2px 8px rgba(0, 0, 0, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.user-message .message-content {
+  box-shadow: 
+    0 4px 20px rgba(52, 152, 219, 0.25),
+    0 2px 8px rgba(52, 152, 219, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .message-content {
+    max-width: 85%;
+  }
+  
+  .message-avatar {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .bot-icon, .user-icon {
+    width: 16px;
+    height: 16px;
+  }
+  
+  .message-text {
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
+  }
+  
+  .message-timestamp {
+    padding: 0 1rem 0.5rem;
+    font-size: 0.65rem;
+  }
+}
+</file>
+
+<file path="src/components/MessageBubble.js">
+import React from 'react';
+import { Bot, User } from 'lucide-react';
+import DataCard from './DataCard';
+import './MessageBubble.css';
+
+const MessageBubble = ({ message }) => {
+  const { text, sender, timestamp, dataCard } = message;
+  const isBot = sender === 'bot';
+
+  const formatTime = (date) => {
+    return new Intl.DateTimeFormat('en-US', {
+      hour: 'numeric',
+      minute: 'numeric',
+      hour12: true
+    }).format(date);
+  };
+
+  return (
+    <div className={`message-bubble ${isBot ? 'bot-message' : 'user-message'}`}>
+      <div className="message-avatar">
+        {isBot ? (
+          <Bot size={20} className="bot-icon" />
+        ) : (
+          <User size={20} className="user-icon" />
+        )}
+      </div>
+      <div className="message-content">
+        <div className="message-text">
+          {text}
+        </div>
+        {dataCard && (
+          <DataCard
+            title={dataCard.title}
+            summary={dataCard.summary}
+            details={dataCard.details}
+            suggestion={dataCard.suggestion}
+            color={dataCard.color}
+          />
+        )}
+        <div className="message-timestamp">
+          {formatTime(timestamp)}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default MessageBubble;
+</file>
+
+<file path="src/components/QuickActions.css">
+.quick-actions {
+  margin: 1rem 0;
+  animation: slideUp 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.quick-actions-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.quick-actions-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 0.3rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.quick-actions-subtitle {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.7);
+  font-style: italic;
+}
+
+.quick-actions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 0.8rem;
+  max-width: 100%;
+}
+
+.quick-action-chip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 0.8rem;
+  border: none;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 
+    0 4px 16px rgba(0, 0, 0, 0.1),
+    0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.quick-action-chip::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--chip-color);
+  opacity: 0;
+  transition: all 0.3s ease;
+  z-index: 0;
+}
+
+.quick-action-chip:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 
+    0 8px 24px rgba(0, 0, 0, 0.15),
+    0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.quick-action-chip:hover::before {
+  opacity: 0.1;
+}
+
+.quick-action-chip:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.chip-icon {
+  position: relative;
+  z-index: 1;
+  color: var(--chip-color);
+  margin-bottom: 0.5rem;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.quick-action-chip:hover .chip-icon {
+  color: var(--chip-color);
+  background: rgba(255, 255, 255, 1);
+  transform: scale(1.1);
+}
+
+.chip-label {
+  position: relative;
+  z-index: 1;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #2c3e50;
+  text-align: center;
+  transition: color 0.3s ease;
+  line-height: 1.2;
+}
+
+.quick-action-chip:hover .chip-label {
+  color: #1a252f;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .quick-actions-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.6rem;
+  }
+  
+  .quick-action-chip {
+    padding: 0.8rem 0.6rem;
+  }
+  
+  .chip-icon {
+    width: 28px;
+    height: 28px;
+    margin-bottom: 0.4rem;
+  }
+  
+  .chip-label {
+    font-size: 0.8rem;
+  }
+  
+  .quick-actions-title {
+    font-size: 1rem;
+  }
+  
+  .quick-actions-subtitle {
+    font-size: 0.8rem;
+  }
+}
+</file>
+
+<file path="src/components/QuickActions.js">
+import React from 'react';
+import { Droplets, CloudRain, MapPin, TestTube, FileText, Activity } from 'lucide-react';
+import './QuickActions.css';
+
+const QuickActions = ({ language, onActionClick, isVisible }) => {
+  const actions = [
+    {
+      key: 'groundwater',
+      icon: <Droplets size={18} />,
+      labelEn: 'Water Level',
+      labelHi: 'जल स्तर',
+      color: '#3498db'
+    },
+    {
+      key: 'rainfall',
+      icon: <CloudRain size={18} />,
+      labelEn: 'Monsoon Impact',
+      labelHi: 'मानसून प्रभाव',
+      color: '#2ecc71'
+    },
+    {
+      key: 'boring',
+      icon: <MapPin size={18} />,
+      labelEn: 'Boring Location',
+      labelHi: 'बोरिंग स्थान',
+      color: '#e67e22'
+    },
+    {
+      key: 'quality',
+      icon: <TestTube size={18} />,
+      labelEn: 'Water Quality',
+      labelHi: 'जल गुणवत्ता',
+      color: '#9b59b6'
+    },
+    {
+      key: 'gec',
+      icon: <FileText size={18} />,
+      labelEn: 'GEC-2015',
+      labelHi: 'GEC-2015',
+      color: '#e74c3c'
+    },
+    {
+      key: 'dwlr',
+      icon: <Activity size={18} />,
+      labelEn: 'Live DWLR',
+      labelHi: 'लाइव DWLR',
+      color: '#1abc9c'
+    }
+  ];
+
+  if (!isVisible) return null;
+
+  return (
+    <div className="quick-actions">
+      <div className="quick-actions-header">
+        <span className="quick-actions-title">
+          {language === 'hi' ? '🚀 त्वरित कार्य' : '🚀 Quick Actions'}
+        </span>
+        <span className="quick-actions-subtitle">
+          {language === 'hi' ? 'डेमो सुविधाएं देखें' : 'Try demo features'}
+        </span>
+      </div>
+      <div className="quick-actions-grid">
+        {actions.map((action) => (
+          <button
+            key={action.key}
+            className="quick-action-chip"
+            onClick={() => onActionClick(action.key)}
+            style={{ '--chip-color': action.color }}
+          >
+            <div className="chip-icon">
+              {action.icon}
+            </div>
+            <span className="chip-label">
+              {language === 'hi' ? action.labelHi : action.labelEn}
+            </span>
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default QuickActions;
+</file>
+
+<file path="src/components/TypingIndicator.css">
+.typing-indicator {
+  animation: fadeInTyping 0.4s ease-out;
+}
+
+@keyframes fadeInTyping {
+  from {
+    opacity: 0;
+    transform: translateY(15px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.typing-content {
+  background: rgba(255, 255, 255, 0.98) !important;
+  border-radius: 20px 20px 20px 6px !important;
+  padding: 0.8rem 1.2rem !important;
+  min-height: auto !important;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 
+    0 4px 20px rgba(0, 0, 0, 0.08),
+    0 2px 8px rgba(0, 0, 0, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.typing-animation {
+  display: flex;
+  gap: 0.3rem;
+  align-items: center;
+}
+
+.typing-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #3498db, #2980b9);
+  animation: typingBounce 1.4s ease-in-out infinite;
+}
+
+.typing-dot:nth-child(1) {
+  animation-delay: 0ms;
+}
+
+.typing-dot:nth-child(2) {
+  animation-delay: 200ms;
+}
+
+.typing-dot:nth-child(3) {
+  animation-delay: 400ms;
+}
+
+@keyframes typingBounce {
+  0%, 60%, 100% {
+    transform: translateY(0);
+    opacity: 0.4;
+  }
+  30% {
+    transform: translateY(-8px);
+    opacity: 1;
+  }
+}
+
+.typing-text {
+  font-size: 0.85rem;
+  color: #6c757d;
+  font-style: italic;
+  font-weight: 500;
+  opacity: 0.8;
+  animation: fadeText 2s ease-in-out infinite;
+}
+
+@keyframes fadeText {
+  0%, 100% {
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .typing-content {
+    padding: 0.7rem 1rem !important;
+    gap: 0.6rem;
+  }
+  
+  .typing-dot {
+    width: 6px;
+    height: 6px;
+  }
+  
+  .typing-text {
+    font-size: 0.8rem;
+  }
+}
+</file>
+
+<file path="src/components/TypingIndicator.js">
+import React from 'react';
+import { Bot } from 'lucide-react';
+import './TypingIndicator.css';
+
+const TypingIndicator = () => {
+  return (
+    <div className="message-bubble bot-message typing-indicator">
+      <div className="message-avatar">
+        <Bot size={20} className="bot-icon" />
+      </div>
+      <div className="message-content typing-content">
+        <div className="typing-animation">
+          <div className="typing-dot"></div>
+          <div className="typing-dot"></div>
+          <div className="typing-dot"></div>
+        </div>
+        <div className="typing-text">JalBuddy is thinking...</div>
+      </div>
+    </div>
+  );
+};
+
+export default TypingIndicator;
+</file>
+
+<file path="src/utils/demoData.js">
+export const demoIntents = {
+  groundwater: {
+    key: 'groundwater',
+    en: {
+      title: 'Groundwater Level',
+      userQuery: 'Show groundwater level for Nalanda, Bihar',
+      summary: 'Latest groundwater depth from surface: 12.4 m (Safe Zone)',
+      details: [
+        { label: 'District', value: 'Nalanda' },
+        { label: 'State', value: 'Bihar' },
+        { label: 'Last updated', value: '2 hours ago' },
+        { label: 'Trend', value: 'Stable ↔' },
+      ],
+      suggestion: 'Would you like weekly alerts for this location?'
+    },
+    hi: {
+      title: 'भूजल स्तर',
+      userQuery: 'नालंदा, बिहार के लिए भूजल स्तर दिखाएं',
+      summary: 'नवीनतम भूजल गहराई: सतह से 12.4 मीटर (सुरक्षित क्षेत्र)',
+      details: [
+        { label: 'जिला', value: 'नालंदा' },
+        { label: 'राज्य', value: 'बिहार' },
+        { label: 'अंतिम अपडेट', value: '2 घंटे पहले' },
+        { label: 'रुझान', value: 'स्थिर ↔' },
+      ],
+      suggestion: 'क्या आप इस स्थान के लिए साप्ताहिक अलर्ट चाहते हैं?'
+    }
+  },
+  rainfall: {
+    key: 'rainfall',
+    en: {
+      title: 'Rainfall Impact',
+      userQuery: 'How will monsoon affect groundwater in Jalgaon?',
+      summary: 'Projected recharge: +8% this season (Normal Monsoon)',
+      details: [
+        { label: 'Region', value: 'Jalgaon, MH' },
+        { label: 'Season', value: 'SW Monsoon' },
+        { label: 'Forecast', value: 'Normal (+3%)' },
+        { label: 'Recharge', value: '+8% expected' },
+      ],
+      suggestion: 'See advisories for water harvesting structures.'
+    },
+    hi: {
+      title: 'वर्षा प्रभाव',
+      userQuery: 'जलगांव में मानसून का भूजल पर क्या प्रभाव होगा?',
+      summary: 'अनुमानित रिचार्ज: इस सीजन +8% (सामान्य मानसून)',
+      details: [
+        { label: 'क्षेत्र', value: 'जलगांव, महाराष्ट्र' },
+        { label: 'सीजन', value: 'दक्षिण पश्चिम मानसून' },
+        { label: 'पूर्वानुमान', value: 'सामान्य (+3%)' },
+        { label: 'रिचार्ज', value: '+8% अपेक्षित' },
+      ],
+      suggestion: 'वाटर हार्वेस्टिंग संरचनाओं के लिए सलाह देखें।'
+    }
+  },
+  boring: {
+    key: 'boring',
+    en: {
+      title: 'Boring Success Probability',
+      userQuery: 'Where should I drill a borewell in Anantapur?',
+      summary: 'Recommended zone: 2 km NE (Success probability: 72%)',
+      details: [
+        { label: 'Optimal depth', value: '180–220 m' },
+        { label: 'Lithology', value: 'Weathered hard rock' },
+        { label: 'Risk level', value: 'Moderate' },
+        { label: 'Advisory', value: 'Avoid over-extraction during Rabi' },
+      ],
+      suggestion: 'Open map with recommended drilling corridor.'
+    },
+    hi: {
+      title: 'बोरिंग सफलता संभावना',
+      userQuery: 'अनंतपुर में बोरवेल कहाँ करना चाहिए?',
+      summary: 'अनुशंसित क्षेत्र: 2 किमी उत्तर-पूर्व (सफलता संभावना: 72%)',
+      details: [
+        { label: 'उत्तम गहराई', value: '180–220 मी.' },
+        { label: 'शैल-विज्ञान', value: 'वेदरिंग हार्ड रॉक' },
+        { label: 'जोखिम स्तर', value: 'मध्यम' },
+        { label: 'सलाह', value: 'रबी सीजन में अति-निकासी न करें' },
+      ],
+      suggestion: 'सुझाए गए ड्रिलिंग कॉरिडोर के साथ मानचित्र खोलें।'
+    }
+  },
+  quality: {
+    key: 'quality',
+    en: {
+      title: 'Water Quality Advisory',
+      userQuery: 'Is groundwater safe for drinking in Bhavnagar?',
+      summary: 'TDS: 820 mg/L (Within acceptable range for irrigation)',
+      details: [
+        { label: 'Fluoride', value: '0.8 mg/L' },
+        { label: 'Nitrate', value: '30 mg/L' },
+        { label: 'Category', value: 'Safe with treatment' },
+        { label: 'Recommendation', value: 'RO + remineralization for drinking' },
+      ],
+      suggestion: 'See CGWB quality guidelines summary.'
+    },
+    hi: {
+      title: 'जल गुणवत्ता परामर्श',
+      userQuery: 'भावनगर में पीने के लिए भूजल सुरक्षित है?',
+      summary: 'TDS: 820 mg/L (सिंचाई हेतु स्वीकार्य सीमा में)',
+      details: [
+        { label: 'फ्लोराइड', value: '0.8 mg/L' },
+        { label: 'नाइट्रेट', value: '30 mg/L' },
+        { label: 'श्रेणी', value: 'उपचार के साथ सुरक्षित' },
+        { label: 'सिफारिश', value: 'पीने हेतु RO + री- मिनरलाइजेशन' },
+      ],
+      suggestion: 'CGWB गुणवत्ता दिशानिर्देश सारांश देखें।'
+    }
+  },
+  gec: {
+    key: 'gec',
+    en: {
+      title: 'GEC-2015 Guidelines',
+      userQuery: 'Explain GEC-2015 categories for my block',
+      summary: 'Block status: Semi-Critical (Stage of development: 75%)',
+      details: [
+        { label: 'Extraction', value: 'High in pre-monsoon' },
+        { label: 'Recharge', value: 'Below long-term avg' },
+        { label: 'Action', value: 'Regulate new abstraction' },
+        { label: 'Note', value: 'Promote recharge structures' },
+      ],
+      suggestion: 'Show category criteria and mitigation checklist.'
+    },
+    hi: {
+      title: 'GEC-2015 दिशानिर्देश',
+      userQuery: 'मेरे ब्लॉक के लिए GEC-2015 श्रेणियां समझाएँ',
+      summary: 'ब्लॉक स्थिति: अर्ध-समालोचनात्मक (विकास चरण: 75%)',
+      details: [
+        { label: 'निकासी', value: 'प्री-मानसून में अधिक' },
+        { label: 'रिचार्ज', value: 'दीर्घकालिक औसत से कम' },
+        { label: 'कार्य', value: 'नई निकासी नियंत्रित करें' },
+        { label: 'नोट', value: 'रिचार्ज संरचनाओं को बढ़ावा दें' },
+      ],
+      suggestion: 'श्रेणी मानदंड और शमन चेकलिस्ट दिखाएँ।'
+    }
+  },
+  dwlr: {
+    key: 'dwlr',
+    en: {
+      title: 'DWLR Live Telemetry',
+      userQuery: 'Show live DWLR readings for Station #1186',
+      summary: 'Real-time WL: 11.9 m | Battery: 92% | Signal: Good',
+      details: [
+        { label: 'Station', value: '#1186' },
+        { label: 'Sampling', value: 'Every 30 mins' },
+        { label: 'Alerts', value: 'No anomalies detected' },
+        { label: 'Graph', value: 'Last 24h: -0.2 m' },
+      ],
+      suggestion: 'Enable SMS alerts for threshold breach.'
+    },
+    hi: {
+      title: 'DWLR लाइव टेलीमेट्री',
+      userQuery: 'स्टेशन #1186 के लाइव DWLR रीडिंग दिखाएँ',
+      summary: 'रीयल-टाइम जलस्तर: 11.9 मी | बैटरी: 92% | सिग्नल: अच्छा',
+      details: [
+        { label: 'स्टेशन', value: '#1186' },
+        { label: 'सैंपलिंग', value: 'हर 30 मिनट' },
+        { label: 'अलर्ट', value: 'कोई असामान्यता नहीं' },
+        { label: 'ग्राफ', value: 'पिछले 24 घंटे: -0.2 मी' },
+      ],
+      suggestion: 'सीमा उल्लंघन पर एसएमएस अलर्ट सक्षम करें।'
+    }
+  }
+};
+</file>
+
+<file path="src/App.css">
+.App {
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+</file>
+
+<file path="src/App.js">
+import React from 'react';
+import ChatInterface from './components/ChatInterface';
+import './App.css';
+
+function App() {
+  return (
+    <div className="App">
+      <ChatInterface />
+    </div>
+  );
+}
+
+export default App;
+</file>
+
+<file path="src/App.test.js">
+import React from 'react';
+import { render, screen } from '@testing-library/react';
+import App from './App';
+
+test('renders learn react link', () => {
+  render(<App />);
+  const linkElement = screen.getByText(/learn react/i);
+  expect(linkElement).toBeInTheDocument();
+});
+</file>
+
+<file path="src/i18n.js">
+import i18n from 'i18next';
+import { initReactI18next } from 'react-i18next';
+import LanguageDetector from 'i18next-browser-languagedetector';
+
+const resources = {
+  en: {
+    translation: {
+      "welcome_message": "Hello! I'm JalBuddy, your AI assistant for groundwater information. How can I help you today?",
+      "input_placeholder": "Type your groundwater query here...",
+      "voice_input_start": "Start voice input",
+      "voice_input_stop": "Stop recording",
+      "send_message": "Send message",
+      "enable_voice": "Enable voice output",
+      "disable_voice": "Disable voice output",
+      "switch_to_hindi": "Switch to Hindi",
+      "switch_to_english": "Switch to English",
+      "groundwater_assistant": "Groundwater Information Assistant",
+      "responses": {
+        "groundwater_info": "I can help you with groundwater information! Are you looking for data about water levels, quality, or availability in a specific area? Please specify your location or district.",
+        "rainfall_info": "Rainfall data is crucial for groundwater recharge. I can provide information about seasonal patterns and their impact on groundwater levels. Which region are you interested in?",
+        "boring_info": "For boring/drilling information, I can guide you on optimal locations based on groundwater data, geological surveys, and success rates in your area. What's your location?",
+        "quality_info": "Water quality is essential for safe consumption. I can provide information about groundwater quality parameters, contamination levels, and treatment recommendations for your area.",
+        "default": "I understand you're looking for groundwater-related information. You can ask me about water levels, quality, rainfall impact, boring locations, or any other groundwater queries. How specifically can I assist you?"
+      }
+    }
+  },
+  hi: {
+    translation: {
+      "welcome_message": "नमस्ते! मैं जलबडी हूं, भूजल जानकारी के लिए आपका AI सहायक। आज मैं आपकी कैसे मदद कर सकता हूं?",
+      "input_placeholder": "यहाँ अपना भूजल प्रश्न लिखें...",
+      "voice_input_start": "वॉयस इनपुट शुरू करें",
+      "voice_input_stop": "रिकॉर्डिंग बंद करें",
+      "send_message": "संदेश भेजें",
+      "enable_voice": "आवाज आउटपुट सक्षम करें",
+      "disable_voice": "आवाज आउटपुट अक्षम करें",
+      "switch_to_hindi": "हिंदी में स्विच करें",
+      "switch_to_english": "अंग्रेजी में स्विच करें",
+      "groundwater_assistant": "भूजल सूचना सहायक",
+      "responses": {
+        "groundwater_info": "मैं आपको भूजल की जानकारी में मदद कर सकता हूं! क्या आप किसी विशिष्ट क्षेत्र में जल स्तर, गुणवत्ता या उपलब्धता के बारे में डेटा चाहते हैं? कृपया अपना स्थान या जिला बताएं।",
+        "rainfall_info": "वर्षा डेटा भूजल रिचार्ज के लिए महत्वपूर्ण है। मैं मौसमी पैटर्न और भूजल स्तर पर उनके प्रभाव के बारे में जानकारी प्रदान कर सकता हूं। आप किस क्षेत्र में रुचि रखते हैं?",
+        "boring_info": "बोरिंग/ड्रिलिंग जानकारी के लिए, मैं भूजल डेटा, भूवैज्ञानिक सर्वेक्षण और आपके क्षेत्र में सफलता दर के आधार पर इष्टतम स्थानों पर मार्गदर्शन कर सकता हूं। आपका स्थान क्या है?",
+        "quality_info": "सुरक्षित उपभोग के लिए पानी की गुणवत्ता आवश्यक है। मैं आपके क्षेत्र के लिए भूजल गुणवत्ता पैरामीटर, संदूषण स्तर और उपचार सिफारिशों के बारे में जानकारी प्रदान कर सकता हूं।",
+        "default": "मैं समझता हूं कि आप भूजल संबंधी जानकारी चाह रहे हैं। आप मुझसे जल स्तर, गुणवत्ता, वर्षा प्रभाव, बोरिंग स्थान या कोई अन्य भूजल प्रश्न पूछ सकते हैं। मैं विशेष रूप से आपकी कैसे सहायता कर सकता हूं?"
+      }
+    }
+  }
+};
+
+i18n
+  .use(LanguageDetector)
+  .use(initReactI18next)
+  .init({
+    resources,
+    lng: 'en', // default language
+    fallbackLng: 'en',
+    keySeparator: '.',
+    interpolation: {
+      escapeValue: false // react already does escaping
+    },
+    detection: {
+      order: ['localStorage', 'navigator', 'htmlTag'],
+      lookupLocalStorage: 'jalbuddy_language',
+      caches: ['localStorage']
+    }
+  });
+
+export default i18n;
+</file>
+
+<file path="src/index.css">
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: linear-gradient(135deg, #e8f4f8 0%, #d1ecf1 50%, #bee5eb 100%);
+  background-attachment: fixed;
+  overflow: hidden;
+}
+
+#root {
+  height: 100%;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+</file>
+
+<file path="src/index.js">
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import './index.css';
+import './i18n';
+import App from './App';
+import * as serviceWorkerRegistration from './serviceWorkerRegistration';
+import reportWebVitals from './reportWebVitals';
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
+
+// If you want your app to work offline and load faster, you can change
+// unregister() to register() below. Note this comes with some pitfalls.
+// Learn more about service workers: https://cra.link/PWA
+serviceWorkerRegistration.unregister();
+
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+reportWebVitals();
+</file>
+
+<file path="src/logo.svg">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 841.9 595.3">
+    <g fill="#61DAFB">
+        <path d="M666.3 296.5c0-32.5-40.7-63.3-103.1-82.4 14.4-63.6 8-114.2-20.2-130.4-6.5-3.8-14.1-5.6-22.4-5.6v22.3c4.6 0 8.3.9 11.4 2.6 13.6 7.8 19.5 37.5 14.9 75.7-1.1 9.4-2.9 19.3-5.1 29.4-19.6-4.8-41-8.5-63.5-10.9-13.5-18.5-27.5-35.3-41.6-50 32.6-30.3 63.2-46.9 84-46.9V78c-27.5 0-63.5 19.6-99.9 53.6-36.4-33.8-72.4-53.2-99.9-53.2v22.3c20.7 0 51.4 16.5 84 46.6-14 14.7-28 31.4-41.3 49.9-22.6 2.4-44 6.1-63.6 11-2.3-10-4-19.7-5.2-29-4.7-38.2 1.1-67.9 14.6-75.8 3-1.8 6.9-2.6 11.5-2.6V78.5c-8.4 0-16 1.8-22.6 5.6-28.1 16.2-34.4 66.7-19.9 130.1-62.2 19.2-102.7 49.9-102.7 82.3 0 32.5 40.7 63.3 103.1 82.4-14.4 63.6-8 114.2 20.2 130.4 6.5 3.8 14.1 5.6 22.5 5.6 27.5 0 63.5-19.6 99.9-53.6 36.4 33.8 72.4 53.2 99.9 53.2 8.4 0 16-1.8 22.6-5.6 28.1-16.2 34.4-66.7 19.9-130.1 62-19.1 102.5-49.9 102.5-82.3zm-130.2-66.7c-3.7 12.9-8.3 26.2-13.5 39.5-4.1-8-8.4-16-13.1-24-4.6-8-9.5-15.8-14.4-23.4 14.2 2.1 27.9 4.7 41 7.9zm-45.8 106.5c-7.8 13.5-15.8 26.3-24.1 38.2-14.9 1.3-30 2-45.2 2-15.1 0-30.2-.7-45-1.9-8.3-11.9-16.4-24.6-24.2-38-7.6-13.1-14.5-26.4-20.8-39.8 6.2-13.4 13.2-26.8 20.7-39.9 7.8-13.5 15.8-26.3 24.1-38.2 14.9-1.3 30-2 45.2-2 15.1 0 30.2.7 45 1.9 8.3 11.9 16.4 24.6 24.2 38 7.6 13.1 14.5 26.4 20.8 39.8-6.3 13.4-13.2 26.8-20.7 39.9zm32.3-13c5.4 13.4 10 26.8 13.8 39.8-13.1 3.2-26.9 5.9-41.2 8 4.9-7.7 9.8-15.6 14.4-23.7 4.6-8 8.9-16.1 13-24.1zM421.2 430c-9.3-9.6-18.6-20.3-27.8-32 9 .4 18.2.7 27.5.7 9.4 0 18.7-.2 27.8-.7-9 11.7-18.3 22.4-27.5 32zm-74.4-58.9c-14.2-2.1-27.9-4.7-41-7.9 3.7-12.9 8.3-26.2 13.5-39.5 4.1 8 8.4 16 13.1 24 4.7 8 9.5 15.8 14.4 23.4zM420.7 163c9.3 9.6 18.6 20.3 27.8 32-9-.4-18.2-.7-27.5-.7-9.4 0-18.7.2-27.8.7 9-11.7 18.3-22.4 27.5-32zm-74 58.9c-4.9 7.7-9.8 15.6-14.4 23.7-4.6 8-8.9 16-13 24-5.4-13.4-10-26.8-13.8-39.8 13.1-3.1 26.9-5.8 41.2-7.9zm-90.5 125.2c-35.4-15.1-58.3-34.9-58.3-50.6 0-15.7 22.9-35.6 58.3-50.6 8.6-3.7 18-7 27.7-10.1 5.7 19.6 13.2 40 22.5 60.9-9.2 20.8-16.6 41.1-22.2 60.6-9.9-3.1-19.3-6.5-28-10.2zM310 490c-13.6-7.8-19.5-37.5-14.9-75.7 1.1-9.4 2.9-19.3 5.1-29.4 19.6 4.8 41 8.5 63.5 10.9 13.5 18.5 27.5 35.3 41.6 50-32.6 30.3-63.2 46.9-84 46.9-4.5-.1-8.3-1-11.3-2.7zm237.2-76.2c4.7 38.2-1.1 67.9-14.6 75.8-3 1.8-6.9 2.6-11.5 2.6-20.7 0-51.4-16.5-84-46.6 14-14.7 28-31.4 41.3-49.9 22.6-2.4 44-6.1 63.6-11 2.3 10.1 4.1 19.8 5.2 29.1zm38.5-66.7c-8.6 3.7-18 7-27.7 10.1-5.7-19.6-13.2-40-22.5-60.9 9.2-20.8 16.6-41.1 22.2-60.6 9.9 3.1 19.3 6.5 28.1 10.2 35.4 15.1 58.3 34.9 58.3 50.6-.1 15.7-23 35.6-58.4 50.6zM320.8 78.4z"/>
+        <circle cx="420.9" cy="296.5" r="45.7"/>
+        <path d="M520.5 78.1z"/>
+    </g>
+</svg>
+</file>
+
+<file path="src/reportWebVitals.js">
+const reportWebVitals = (onPerfEntry) => {
+  if (onPerfEntry && onPerfEntry instanceof Function) {
+    import('web-vitals').then(({ getCLS, getFID, getFCP, getLCP, getTTFB }) => {
+      getCLS(onPerfEntry);
+      getFID(onPerfEntry);
+      getFCP(onPerfEntry);
+      getLCP(onPerfEntry);
+      getTTFB(onPerfEntry);
+    });
+  }
+};
+
+export default reportWebVitals;
+</file>
+
+<file path="src/service-worker.js">
+/* eslint-disable no-restricted-globals */
+
+// This service worker can be customized!
+// See https://developers.google.com/web/tools/workbox/modules
+// for the list of available Workbox modules, or add any other
+// code you'd like.
+// You can also remove this file if you'd prefer not to use a
+// service worker, and the Workbox build step will be skipped.
+
+import { clientsClaim } from 'workbox-core';
+import { ExpirationPlugin } from 'workbox-expiration';
+import { precacheAndRoute, createHandlerBoundToURL } from 'workbox-precaching';
+import { registerRoute } from 'workbox-routing';
+import { StaleWhileRevalidate } from 'workbox-strategies';
+
+clientsClaim();
+
+// Precache all of the assets generated by your build process.
+// Their URLs are injected into the manifest variable below.
+// This variable must be present somewhere in your service worker file,
+// even if you decide not to use precaching. See https://cra.link/PWA
+precacheAndRoute(self.__WB_MANIFEST);
+
+// Set up App Shell-style routing, so that all navigation requests
+// are fulfilled with your index.html shell. Learn more at
+// https://developers.google.com/web/fundamentals/architecture/app-shell
+const fileExtensionRegexp = new RegExp('/[^/?]+\\.[^/]+$');
+registerRoute(
+  // Return false to exempt requests from being fulfilled by index.html.
+  ({ request, url }) => {
+    // If this isn't a navigation, skip.
+    if (request.mode !== 'navigate') {
+      return false;
+    } // If this is a URL that starts with /_, skip.
+
+    if (url.pathname.startsWith('/_')) {
+      return false;
+    } // If this looks like a URL for a resource, because it contains // a file extension, skip.
+
+    if (url.pathname.match(fileExtensionRegexp)) {
+      return false;
+    } // Return true to signal that we want to use the handler.
+
+    return true;
+  },
+  createHandlerBoundToURL(process.env.PUBLIC_URL + '/index.html')
+);
+
+// An example runtime caching route for requests that aren't handled by the
+// precache, in this case same-origin .png requests like those from in public/
+registerRoute(
+  // Add in any other file extensions or routing criteria as needed.
+  ({ url }) => url.origin === self.location.origin && url.pathname.endsWith('.png'), // Customize this strategy as needed, e.g., by changing to CacheFirst.
+  new StaleWhileRevalidate({
+    cacheName: 'images',
+    plugins: [
+      // Ensure that once this runtime cache reaches a maximum size the
+      // least-recently used images are removed.
+      new ExpirationPlugin({ maxEntries: 50 }),
+    ],
+  })
+);
+
+// This allows the web app to trigger skipWaiting via
+// registration.waiting.postMessage({type: 'SKIP_WAITING'})
+self.addEventListener('message', (event) => {
+  if (event.data && event.data.type === 'SKIP_WAITING') {
+    self.skipWaiting();
+  }
+});
+
+// Any other custom service worker logic can go here.
+</file>
+
+<file path="src/serviceWorkerRegistration.js">
+// This optional code is used to register a service worker.
+// register() is not called by default.
+
+// This lets the app load faster on subsequent visits in production, and gives
+// it offline capabilities. However, it also means that developers (and users)
+// will only see deployed updates on subsequent visits to a page, after all the
+// existing tabs open on the page have been closed, since previously cached
+// resources are updated in the background.
+
+// To learn more about the benefits of this model and instructions on how to
+// opt-in, read https://cra.link/PWA
+
+const isLocalhost = Boolean(
+  window.location.hostname === 'localhost' ||
+    // [::1] is the IPv6 localhost address.
+    window.location.hostname === '[::1]' ||
+    // 127.0.0.0/8 are considered localhost for IPv4.
+    window.location.hostname.match(/^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/)
+);
+
+export function register(config) {
+  if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
+    // The URL constructor is available in all browsers that support SW.
+    const publicUrl = new URL(process.env.PUBLIC_URL, window.location.href);
+    if (publicUrl.origin !== window.location.origin) {
+      // Our service worker won't work if PUBLIC_URL is on a different origin
+      // from what our page is served on. This might happen if a CDN is used to
+      // serve assets; see https://github.com/facebook/create-react-app/issues/2374
+      return;
+    }
+
+    window.addEventListener('load', () => {
+      const swUrl = `${process.env.PUBLIC_URL}/service-worker.js`;
+
+      if (isLocalhost) {
+        // This is running on localhost. Let's check if a service worker still exists or not.
+        checkValidServiceWorker(swUrl, config);
+
+        // Add some additional logging to localhost, pointing developers to the
+        // service worker/PWA documentation.
+        navigator.serviceWorker.ready.then(() => {
+          console.log(
+            'This web app is being served cache-first by a service ' +
+              'worker. To learn more, visit https://cra.link/PWA'
+          );
+        });
+      } else {
+        // Is not localhost. Just register service worker
+        registerValidSW(swUrl, config);
+      }
+    });
+  }
+}
+
+function registerValidSW(swUrl, config) {
+  navigator.serviceWorker
+    .register(swUrl)
+    .then((registration) => {
+      registration.onupdatefound = () => {
+        const installingWorker = registration.installing;
+        if (installingWorker == null) {
+          return;
+        }
+        installingWorker.onstatechange = () => {
+          if (installingWorker.state === 'installed') {
+            if (navigator.serviceWorker.controller) {
+              // At this point, the updated precached content has been fetched,
+              // but the previous service worker will still serve the older
+              // content until all client tabs are closed.
+              console.log(
+                'New content is available and will be used when all ' +
+                  'tabs for this page are closed. See https://cra.link/PWA.'
+              );
+
+              // Execute callback
+              if (config && config.onUpdate) {
+                config.onUpdate(registration);
+              }
+            } else {
+              // At this point, everything has been precached.
+              // It's the perfect time to display a
+              // "Content is cached for offline use." message.
+              console.log('Content is cached for offline use.');
+
+              // Execute callback
+              if (config && config.onSuccess) {
+                config.onSuccess(registration);
+              }
+            }
+          }
+        };
+      };
+    })
+    .catch((error) => {
+      console.error('Error during service worker registration:', error);
+    });
+}
+
+function checkValidServiceWorker(swUrl, config) {
+  // Check if the service worker can be found. If it can't reload the page.
+  fetch(swUrl, {
+    headers: { 'Service-Worker': 'script' },
+  })
+    .then((response) => {
+      // Ensure service worker exists, and that we really are getting a JS file.
+      const contentType = response.headers.get('content-type');
+      if (
+        response.status === 404 ||
+        (contentType != null && contentType.indexOf('javascript') === -1)
+      ) {
+        // No service worker found. Probably a different app. Reload the page.
+        navigator.serviceWorker.ready.then((registration) => {
+          registration.unregister().then(() => {
+            window.location.reload();
+          });
+        });
+      } else {
+        // Service worker found. Proceed as normal.
+        registerValidSW(swUrl, config);
+      }
+    })
+    .catch(() => {
+      console.log('No internet connection found. App is running in offline mode.');
+    });
+}
+
+export function unregister() {
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.ready
+      .then((registration) => {
+        registration.unregister();
+      })
+      .catch((error) => {
+        console.error(error.message);
+      });
+  }
+}
+</file>
+
+<file path="src/setupTests.js">
+// jest-dom adds custom jest matchers for asserting on DOM nodes.
+// allows you to do things like:
+// expect(element).toHaveTextContent(/react/i)
+// learn more: https://github.com/testing-library/jest-dom
+import '@testing-library/jest-dom';
+</file>
+
+<file path=".gitignore">
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# testing
+/coverage
+
+# production
+/build
+
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+</file>
+
+<file path="package.json">
+{
+  "name": "jalbuddy-chatbot",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "cra-template-pwa": "2.0.0",
+    "i18next": "^25.5.2",
+    "i18next-browser-languagedetector": "^8.2.0",
+    "lucide-react": "^0.544.0",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "react-i18next": "^15.7.3",
+    "react-scripts": "5.0.1",
+    "web-vitals": "^5.1.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
+</file>
+
+<file path="README_ENHANCED.md">
+# 🌊 JalBuddy - Enhanced AI Groundwater Assistant
+
+## 🎯 **Phase 1: Complete with Demo Features & Modern UI** ✅
+
+A stunning Progressive Web App (PWA) chatbot for the **Smart India Hackathon 2025**, featuring advanced demo capabilities and a beautiful modern interface inspired by top-tier AI assistants.
+
+---
+
+## 🌟 **NEW DEMO FEATURES FOR PRESENTATION**
+
+### 🚀 **Interactive Quick Actions**
+Six beautiful demo buttons that showcase real features:
+- 💧 **Groundwater Level** - Live depth readings with safety indicators
+- 🌧️ **Monsoon Impact** - Rainfall recharge predictions  
+- 📍 **Boring Location** - AI-powered drilling recommendations
+- 🔬 **Water Quality** - TDS, fluoride, nitrate analysis
+- 📋 **GEC-2015** - Government guideline compliance 
+- 📊 **Live DWLR** - Real-time telemetry from sensors
+
+### 📊 **Smart Data Cards**
+Each demo feature shows professional data cards with:
+- **Live Status Indicators** - Real-time data badges
+- **Detailed Metrics** - Location, trends, recommendations  
+- **Visual Summaries** - Color-coded information blocks
+- **Action Suggestions** - Next steps for users
+- **Data Sources** - INGRES API & CGWB attribution
+
+### 🎭 **Bilingual Demo Content** 
+All demo features work seamlessly in **Hindi & English**:
+- हिंदी Quick action labels and responses  
+- Native language data presentations
+- Culturally appropriate recommendations
+- Professional technical translations
+
+---
+
+## 🎨 **MODERNIZED UI INSPIRED BY BEAUTIFUL CHATBOTS**
+
+### 🔮 **Glass-Morphism 2.0**
+- **Rounded Card Interface** - 24px border radius throughout
+- **Enhanced Gradients** - 4-color blend (blue→purple→pink→coral)
+- **Advanced Blur Effects** - Multi-layer backdrop filters
+- **Subtle Shadows** - Layered depth with inset highlights
+- **Inter Font** - Modern typography with multiple weights
+
+### 💎 **Premium Visual Elements**
+- **Animated Welcome Sequence** - Pulsing logo with floating text
+- **Quick Action Chips** - Colorful interactive buttons with icons
+- **Data Visualization Cards** - Professional information display
+- **Enhanced Message Bubbles** - Improved shadows and typography
+- **Voice Waveform** - Animated bars during speech input
+- **Typing Indicators** - Realistic 3-dot bounce animation
+
+### 🎯 **Interaction Design**
+- **Hover Animations** - Subtle lift and glow effects
+- **Focus States** - Multi-ring selection indicators  
+- **Loading States** - Natural conversation flow
+- **State Transitions** - Smooth cubic-bezier animations
+- **Micro-interactions** - Button ripples and feedback
+
+---
+
+## 🛠️ **TECHNICAL IMPLEMENTATION**
+
+### 📦 **New Components Added**
+```
+src/components/
+├── QuickActions.js/.css     # Demo feature buttons
+├── DataCard.js/.css         # Information display cards  
+├── TypingIndicator.js/.css  # Animated typing feedback
+└── Enhanced existing components with modern styling
+```
+
+### 🗄️ **Demo Data System**
+```javascript
+// Structured mock data for 6 features × 2 languages
+demoIntents = {
+  groundwater: { en: {...}, hi: {...} },
+  rainfall: { en: {...}, hi: {...} },
+  boring: { en: {...}, hi: {...} },
+  quality: { en: {...}, hi: {...} },
+  gec: { en: {...}, hi: {...} },
+  dwlr: { en: {...}, hi: {...} }
+}
+```
+
+### 🎨 **Modern Design System**
+- **Color Palette**: 6 distinct colors for feature categories
+- **Typography**: Inter font family with semantic weights
+- **Spacing**: 8px grid system for consistent layouts
+- **Shadows**: 3-layer system (ambient, direct, inset)
+- **Animations**: 60fps smooth transitions
+
+---
+
+## 🚀 **DEMO PRESENTATION FLOW**
+
+### 1. **Welcome Experience** (3 seconds)
+- Animated logo pulse with gradient background
+- Multi-language welcome message
+- Quick actions fade-in
+
+### 2. **Feature Showcase** (per feature - 10 seconds)
+- Click quick action button → user message appears
+- Typing indicator with realistic delay  
+- Data card slides in with live information
+- Voice synthesis reads response (optional)
+
+### 3. **Language Switching Demo** (5 seconds)
+- Toggle EN ↔ हिं button in header
+- All interface elements update instantly
+- Quick actions and responses change language
+
+### 4. **Voice Interaction Demo** (15 seconds)  
+- Click microphone → waveform animation starts
+- Speak query → text appears in input
+- Send → typing indicator → voice response
+
+---
+
+## 🎯 **PRESENTATION TALKING POINTS**
+
+### **Visual Impact**
+*"Notice the modern glass-morphism design with rounded cards, inspired by premium AI assistants like ChatGPT and Claude. The gradient background and Inter typography create a professional, trustworthy feel."*
+
+### **Demo Features** 
+*"These 6 quick actions demonstrate real INGRES API integrations we'll build. Each shows live groundwater data with actionable insights - from boring success probability to GEC-2015 compliance."*
+
+### **Bilingual Excellence**
+*"Complete Hindi support ensures accessibility for 500M+ rural users. Technical terms are properly translated while maintaining accuracy."*
+
+### **Voice Interaction**
+*"Voice-first design accommodates users with limited digital literacy. The waveform animation provides clear feedback during speech input."*
+
+### **Data Visualization**
+*"Professional data cards present complex information clearly - depth readings, quality parameters, regulatory compliance - all in digestible formats."*
+
+---
+
+## 🌐 **BROWSER COMPATIBILITY & PERFORMANCE**
+
+- **Chrome/Edge**: Full feature support (recommended)
+- **Mobile Browsers**: Optimized touch interface  
+- **Voice Features**: Web Speech API fallbacks
+- **Offline Ready**: PWA with service workers
+- **Performance**: <100ms interaction responses
+
+---
+
+## 🚀 **RUN THE ENHANCED DEMO**
+
+```bash
+# Navigate to project
+cd "jalbuddy-chatbot"
+
+# Start development server  
+npm start
+
+# Opens at http://localhost:3000
+```
+
+### **Demo Script** (2-minute presentation)
+1. **Open app** → Show welcome animation
+2. **Click "Water Level"** → Demonstrate data card
+3. **Switch to Hindi** → Show bilingual support  
+4. **Use voice input** → Demonstrate accessibility
+5. **Show typing indicator** → Highlight UX polish
+6. **Click different features** → Showcase variety
+
+---
+
+## 🏆 **COMPETITIVE ADVANTAGES**
+
+### **vs Traditional Government Portals**
+- ✅ Modern, intuitive interface vs outdated forms
+- ✅ Conversational AI vs complex navigation  
+- ✅ Mobile-first vs desktop-only design
+- ✅ Voice accessibility vs text-heavy content
+
+### **vs Generic Chatbots**  
+- ✅ Domain-specific groundwater expertise
+- ✅ Government data integration (INGRES/CGWB)
+- ✅ Regulatory compliance knowledge (GEC-2015)
+- ✅ Rural India language/cultural adaptation
+
+### **vs International Solutions**
+- ✅ India-specific geological understanding
+- ✅ Monsoon pattern integration
+- ✅ Local regulatory framework knowledge
+- ✅ Hindi language technical accuracy
+
+---
+
+## 🎖️ **HACKATHON READINESS**
+
+**✅ Problem Statement Addressed**: AI-powered groundwater information system  
+**✅ Target Users**: Farmers, officials, rural communities  
+**✅ Technical Innovation**: RAG + LLM + Government APIs  
+**✅ Social Impact**: Water security for 600M+ Indians  
+**✅ Scalability**: Cloud-native PWA architecture  
+**✅ Presentation Ready**: Live demo with realistic data  
+
+---
+
+**🌊 JalBuddy - Making India's groundwater data accessible through beautiful, intelligent conversation! 🇮🇳**
+
+*Ready for Smart India Hackathon 2025 presentation! 🚀*
+</file>
+
+<file path="README.md">
+# JalBuddy - Groundwater Information Assistant
+
+## Phase 1: Basic Appearance and Interface (COMPLETED ✅)
+
+A Progressive Web App (PWA) chatbot interface for groundwater information assistance, designed for the Smart India Hackathon 2025.
+
+### 🌟 Features Implemented
+
+#### ✅ **Basic Chat Interface**
+- Clean, modern chat UI with message bubbles
+- Responsive design optimized for mobile and desktop
+- Real-time message display with smooth animations
+- Auto-scrolling to latest messages
+
+#### ✅ **Voice Input & Output**
+- **Web Speech API Integration**: Browser-based speech recognition
+- **Microphone Button**: Visual feedback with pulsing animation when recording
+- **Text-to-Speech**: Bot responses can be read aloud
+- **Voice Toggle**: Users can enable/disable voice output
+- **Multi-language Support**: Voice recognition for English and Hindi
+
+#### ✅ **Text Input Handling**
+- Text input with Enter key support
+- Placeholder text that adapts to selected language
+- Input validation and message state management
+- Real-time typing feedback
+
+#### ✅ **Multi-language Support (i18next)**
+- **English** and **Hindi** support
+- Language toggle button with visual indicators
+- Localized UI text and bot responses
+- Persistent language preference (localStorage)
+
+#### ✅ **Progressive Web App (PWA)**
+- Service worker for offline capabilities
+- Web app manifest for installability
+- Mobile-first responsive design
+- App-like experience on mobile devices
+
+### 🎨 Humanized Design Features
+
+- **Modern Glass-morphism UI**: Advanced backdrop blur effects and translucent surfaces
+- **Dynamic Gradients**: Multi-layered blue-purple-pink gradient with floating particle effects
+- **Smooth Animations**: Sophisticated cubic-bezier transitions and micro-interactions
+- **Typing Indicators**: Realistic 3-dot bouncing animation when bot is responding
+- **Welcome Animation**: Animated welcome sequence with pulsing logo and floating text
+- **Voice Waveform**: Real-time visual feedback during voice input with animated bars
+- **Enhanced Message Bubbles**: Layered shadows, improved typography, and hover effects
+- **Avatar Animations**: Gentle pulsing effects around user and bot avatars
+- **Interactive Buttons**: Ripple effects, state animations, and visual feedback
+- **Mobile Optimized**: Touch-friendly interface with responsive design
+
+### 🤖 Bot Intelligence (Basic)
+
+Currently includes placeholder responses for:
+- Groundwater level inquiries
+- Rainfall and monsoon queries
+- Boring/drilling location assistance
+- Water quality information
+- Default helpful responses
+
+### 🚀 Getting Started
+
+```bash
+# Navigate to project directory
+cd "jalbuddy-chatbot"
+
+# Install dependencies
+npm install --legacy-peer-deps
+
+# Start development server
+npm start
+```
+
+The application will open at `http://localhost:3000`
+
+### 📱 Enhanced Usage
+
+1. **Welcome Experience**: Enjoy the animated welcome sequence when you first load the app
+2. **Text Chat**: Type your groundwater-related questions in the enhanced input box
+3. **Voice Input**: Click the microphone button to see waveform animation while speaking
+4. **Typing Feedback**: Watch the realistic typing indicator while JalBuddy prepares responses
+5. **Language Switch**: Use the language toggle (EN/हिं) to switch between English and Hindi
+6. **Voice Output**: Click the speaker icon to enable/disable voice responses
+7. **Interactive Elements**: Enjoy hover effects, button animations, and smooth transitions
+8. **Send Messages**: Press Enter or click the send button (disabled during typing)
+
+### 🛠️ Technology Stack
+
+- **Frontend**: React 18+ with hooks
+- **Styling**: Modern CSS with flexbox and grid
+- **Icons**: Lucide React icons
+- **Internationalization**: i18next with browser language detection
+- **Voice**: Web Speech API (SpeechRecognition + SpeechSynthesis)
+- **PWA**: Create React App PWA template with service workers
+
+### 🏗️ Project Structure
+
+```
+src/
+├── components/
+│   ├── ChatInterface.js       # Main chat component with typing states
+│   ├── ChatInterface.css      # Enhanced chat interface styles
+│   ├── MessageBubble.js       # Enhanced message display with animations
+│   ├── MessageBubble.css      # Improved message bubble styles
+│   ├── TypingIndicator.js     # Animated typing indicator component
+│   ├── TypingIndicator.css    # Typing indicator styles
+│   ├── LanguageToggle.js      # Language switching component
+│   └── LanguageToggle.css     # Language toggle styles
+├── i18n.js                    # Internationalization setup
+├── App.js                     # Main app component
+├── App.css                    # Global app styles
+├── index.js                   # React app entry point
+└── index.css                  # Global CSS reset and base styles
+```
+
+### 🎯 Phase 1 Objectives - Status
+
+- [x] **Setup React PWA project structure**
+- [x] **Create basic chat interface components**
+- [x] **Implement text input handling**
+- [x] **Add Web Speech API voice input**
+- [x] **Implement text-to-speech responses**
+- [x] **Setup localization framework**
+
+### 🔜 Next Steps (Phase 2)
+
+- Integration with INGRES API for real groundwater data
+- Enhanced bot responses with actual data
+- GEC-2015 guideline explanations
+- Location-based services
+- Offline data caching
+
+### 🌐 Browser Compatibility
+
+- **Chrome**: Full support (recommended)
+- **Edge**: Full support
+- **Firefox**: Limited voice support
+- **Safari**: Limited voice support
+- **Mobile browsers**: Optimized for mobile Chrome/Safari
+
+### 📋 Environment Requirements
+
+- Node.js 14+
+- NPM 6+
+- Modern web browser with Web Speech API support
+- Microphone access for voice features
+
+### 🐛 Known Issues
+
+- Voice recognition may require user interaction to initialize
+- Speech synthesis voices vary by browser and OS
+- Some browsers may require HTTPS for speech features in production
+
+### 🔧 Development Notes
+
+- Uses legacy peer deps to resolve React 19 compatibility issues
+- PWA features require HTTPS in production
+- Voice features work best in Chrome-based browsers
+
+---
+
+**JalBuddy** - Making groundwater information accessible to everyone! 🌊💧
+</file>
+
+</files>

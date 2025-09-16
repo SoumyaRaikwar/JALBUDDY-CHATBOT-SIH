@@ -1,0 +1,99 @@
+.jalbuddy-logo {
+  position: relative;
+  display: inline-block;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+}
+
+.jalbuddy-logo.animated {
+  animation: logoFloat 3s ease-in-out infinite;
+}
+
+.jalbuddy-logo svg {
+  transition: transform 0.3s ease;
+}
+
+.jalbuddy-logo:hover svg {
+  transform: scale(1.1);
+}
+
+/* Floating animation */
+@keyframes logoFloat {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+/* Floating particles */
+.particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: rgba(59, 130, 246, 0.6);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.particle-1 {
+  top: 20%;
+  left: -10px;
+  animation: floatParticle1 4s ease-in-out infinite;
+}
+
+.particle-2 {
+  top: 60%;
+  right: -8px;
+  animation: floatParticle2 3.5s ease-in-out infinite 1s;
+}
+
+.particle-3 {
+  bottom: 10%;
+  left: -5px;
+  animation: floatParticle3 4.5s ease-in-out infinite 2s;
+}
+
+@keyframes floatParticle1 {
+  0%, 100% {
+    transform: translateY(0px) translateX(0px);
+    opacity: 0.3;
+  }
+  50% {
+    transform: translateY(-15px) translateX(5px);
+    opacity: 0.8;
+  }
+}
+
+@keyframes floatParticle2 {
+  0%, 100% {
+    transform: translateY(0px) translateX(0px);
+    opacity: 0.4;
+  }
+  50% {
+    transform: translateY(-10px) translateX(-8px);
+    opacity: 0.9;
+  }
+}
+
+@keyframes floatParticle3 {
+  0%, 100% {
+    transform: translateY(0px) translateX(0px);
+    opacity: 0.2;
+  }
+  50% {
+    transform: translateY(-20px) translateX(10px);
+    opacity: 0.7;
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .jalbuddy-logo.animated {
+    animation: none; /* Reduce animations on mobile for performance */
+  }
+  
+  .particle {
+    display: none; /* Hide particles on mobile */
+  }
+}
