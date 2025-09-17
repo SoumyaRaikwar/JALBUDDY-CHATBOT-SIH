@@ -99,7 +99,7 @@ const ChatInterface = () => {
     localStorage.setItem('messages', JSON.stringify(messages));
   }, [messages]);
 
-  const handleSendMessage = () => {
+  const handleSendMessage = async () => {
     if (inputText.trim() === '' || isTyping) return;
 
     const userMessageText = inputText;
@@ -113,28 +113,65 @@ const ChatInterface = () => {
     setMessages(prev => [...prev, newMessage]);
     setInputText('');
     setIsTyping(true);
+    setError(null);
     
-    // Simulate bot thinking time (1.5-2.5 seconds)
-    const thinkingTime = 1500 + Math.random() * 1000;
-    
-    setTimeout(() => {
-      const botResponse = generateBotResponse(userMessageText);
+    try {
+      // Call the backend API
+      const response = await fetch('http://localhost:8000/api/chat/query', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          query: userMessageText,
+          language: language,
+          user_id: 'frontend_user',
+          location: 'User Location'
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      
       const botMessage = {
         id: Date.now() + 1,
-        text: botResponse,
+        text: data.response,
         sender: 'bot',
-        timestamp: new Date()
+        timestamp: new Date(),
+        confidence: data.confidence,
+        responseType: data.response_type
       };
+      
       setMessages(prev => [...prev, botMessage]);
       setIsTyping(false);
       
       // Text-to-speech for bot response
       if (voiceEnabled) {
         setTimeout(() => {
-          speakText(botResponse);
+          speakText(data.response);
         }, 300);
       }
-    }, thinkingTime);
+      
+    } catch (error) {
+      console.error('Error sending message:', error);
+      setIsTyping(false);
+      
+      const errorMessage = {
+        id: Date.now() + 1,
+        text: language === 'hi' 
+          ? 'क्षमा करें, मुझे कनेक्शन की समस्या हो रही है। कृपया फिर से कोशिश करें।'
+          : 'Sorry, I\'m having connection issues. Please try again.',
+        sender: 'bot',
+        timestamp: new Date(),
+        isError: true
+      };
+      
+      setMessages(prev => [...prev, errorMessage]);
+      setError('Connection failed. Please check if the backend is running.');
+    }
   };
 
   const handleQuickAction = (actionKey) => {

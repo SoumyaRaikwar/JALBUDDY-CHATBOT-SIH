@@ -14,7 +14,7 @@ from api.routes import chat, voice, health, ingres
 from core.database import init_db
 from services.ai_service import AIService
 from services.ingres_service import IngresService
-from services.rag_service import RAGService
+from services.rag_service_chroma import ChromaRAGService
 
 logger = logging.getLogger(__name__)
 
@@ -40,7 +40,7 @@ async def lifespan(app: FastAPI):
         logger.info("✅ INGRES service initialized")
 
         # Initialize RAG service
-        rag_service = RAGService()
+        rag_service = ChromaRAGService()
         await rag_service.initialize()
         app.state.rag_service = rag_service
         logger.info("✅ RAG service initialized")
