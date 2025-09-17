@@ -63,6 +63,9 @@ coverage/
 .env.*
 *.env
 *.env.*
+# Allow example env files
+!.env.example
+!*.env.example
 
 # -----------------------------
 # IDE/editor
