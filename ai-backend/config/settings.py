@@ -31,9 +31,18 @@ class Settings(BaseSettings):
     # Database
     DATABASE_URL: str = "sqlite:///./jalbuddy.db"
 
+    # Caches & Streams
+    REDIS_URL: str = "redis://localhost:6379"
+    KAFKA_BROKER_URL: str = "localhost:9092"
+
+    # Vector / RAG
+    QDRANT_URL: str = "http://localhost:6333"
+    CHROMA_DB_PATH: str = "data/chroma"
+
     # Features
     ENABLE_VOICE_PROCESSING: bool = True
     ENABLE_OFFLINE_MODE: bool = True
+    USE_MOCK_SERVICES: bool = True
 
     class Config:
         env_file = ".env"
