@@ -1,0 +1,15 @@
+FROM python:3.9-slim
+
+WORKDIR /app
+
+# Install Flask
+RUN pip install flask
+
+# Copy the mock server
+COPY whatsapp-mock.py .
+
+# Expose port
+EXPOSE 8080
+
+# Run the server
+CMD ["python", "whatsapp-mock.py"]

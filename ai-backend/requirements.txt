@@ -1,0 +1,41 @@
+# Core Framework
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+pydantic==2.5.0
+pydantic-settings==2.1.0
+
+# AI/ML Core - Updated compatible versions
+torch>=2.2.0
+transformers==4.36.0
+sentence-transformers==2.2.2
+openai==1.3.5
+anthropic==0.7.8
+
+# RAG & Vector Database  
+langchain==0.0.354
+chromadb==0.4.20
+faiss-cpu>=1.8.0
+
+# Voice Processing - Updated versions
+openai-whisper>=20231117
+librosa==0.10.1
+soundfile>=0.12.0
+
+# TTS Alternative (lighter, compatible)
+gTTS==2.4.0
+pydub==0.25.1
+
+# Document Processing
+PyPDF2==3.0.1
+python-docx==1.1.0
+
+# Database & Caching
+SQLAlchemy==2.0.23
+redis==5.0.1
+psycopg2-binary==2.9.9
+
+# Utilities
+python-dotenv==1.0.0
+httpx==0.25.2
+numpy==1.24.3
+pandas>=1.4,<2.0

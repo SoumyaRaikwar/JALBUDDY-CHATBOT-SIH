@@ -46,7 +46,7 @@ services:
   # FastAPI Backend Service
   backend:
     build:
-      context: ./AI-BACKEND
+      context: ./ai-backend
       dockerfile: Dockerfile.dev
     container_name: jalbuddy-backend
     environment:
@@ -58,7 +58,7 @@ services:
     ports:
       - "8000:8000"
     volumes:
-      - ./AI-BACKEND:/app
+      - ./ai-backend:/app
       - ai_models:/app/models
     depends_on:
       - postgres
