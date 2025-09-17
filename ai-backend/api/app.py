@@ -11,6 +11,7 @@ from config.settings import get_settings
 from api.routes import chat, health
 from api.routes import nlp_voice
 from api.routes import data_integration
+from api.routes import predictive
 from services.ai_service_enhanced import EnhancedAIService
 
 logger = logging.getLogger(__name__)
@@ -83,6 +84,11 @@ def create_app() -> FastAPI:
                     "groundwater_level": "/api/data/groundwater/level",
                     "dwlr_telemetry": "/api/data/dwlr/telemetry",
                     "assessment_units": "/api/data/assessment/units"
+                },
+                "predictive": {
+                    "forecast": "/api/predictive/forecast",
+                    "drilling_success": "/api/predictive/drilling-success",
+                    "conservation": "/api/predictive/conservation"
                 }
             }
         }
@@ -91,5 +97,6 @@ def create_app() -> FastAPI:
     app.include_router(chat.router, prefix="/api/chat", tags=["chat"]) 
     app.include_router(nlp_voice.router, prefix="/api/nlp", tags=["nlp","voice"]) 
     app.include_router(data_integration.router, prefix="/api/data", tags=["data"]) 
+    app.include_router(predictive.router, prefix="/api/predictive", tags=["predictive"]) 
 
     return app
