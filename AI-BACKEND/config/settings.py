@@ -23,14 +23,16 @@ class Settings(BaseSettings):
 
     # Database Configuration
     DATABASE_URL: str = "sqlite:///./jalbuddy.db"
-
-    # Redis Configuration
+    
+    # Redis Configuration 
     REDIS_URL: str = "redis://localhost:6379"
-
-    # Vector Database Settings
-    VECTOR_STORE_TYPE: str = "chromadb"
+    
+    # Vector Database Settings (Qdrant)
+    QDRANT_URL: str = "http://localhost:6333"
+    VECTOR_STORE_TYPE: str = "qdrant"
     EMBEDDING_MODEL: str = "sentence-transformers/all-MiniLM-L6-v2"
     EMBEDDING_DIMENSION: int = 384
+    VECTOR_COLLECTION: str = "gec2015_knowledge"
 
     # RAG Configuration
     CHUNK_SIZE: int = 512
@@ -48,8 +50,21 @@ class Settings(BaseSettings):
 
     # INGRES API Configuration
     INGRES_BASE_URL: str = "https://ingres.iith.ac.in/api"
+    INGRES_MOCK_URL: str = "http://localhost:8081/api"  # For development
     INGRES_API_KEY: Optional[str] = None
+    USE_MOCK_INGRES: bool = True  # Switch for development vs production
+    INGRES_CACHE_TTL: int = 3600  # 1 hour in seconds
 
+    # WhatsApp Business API Configuration
+    WHATSAPP_API_URL: str = "https://graph.facebook.com/v18.0"
+    WHATSAPP_PHONE_NUMBER_ID: Optional[str] = None
+    WHATSAPP_ACCESS_TOKEN: Optional[str] = None
+    WHATSAPP_VERIFY_TOKEN: str = "jalbuddy_webhook_verify_2025"
+    WHATSAPP_MOCK_URL: str = "http://localhost:8080"  # For development
+    
+    # Environment Detection
+    ENVIRONMENT: str = "development"  # development, staging, production
+    
     # Security
     SECRET_KEY: str = "jalbuddy-secret-key-change-in-production"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 30

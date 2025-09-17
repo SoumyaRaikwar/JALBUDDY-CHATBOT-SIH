@@ -13,15 +13,19 @@ from config.settings import get_settings
 from api.routes import chat, voice, health, ingres
 from core.database import init_db
 from services.ai_service import AIService
+from services.ingres_service import IngresService
+from services.rag_service_chroma import ChromaRAGService
 
 logger = logging.getLogger(__name__)
 
 ai_service = None
+ingres_service = None
+rag_service = None
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     """Application lifespan events"""
-    global ai_service
+    global ai_service, ingres_service, rag_service
 
     logger.info("🚀 Starting jalBuddy AI Backend...")
 
@@ -29,7 +33,23 @@ async def lifespan(app: FastAPI):
         await init_db()
         logger.info("✅ Database initialized")
 
-        ai_service = AIService()
+        # Initialize INGRES service
+        ingres_service = IngresService()
+        await ingres_service.initialize()
+        app.state.ingres_service = ingres_service
+        logger.info("✅ INGRES service initialized")
+
+        # Initialize RAG service
+        rag_service = ChromaRAGService()
+        await rag_service.initialize()
+        app.state.rag_service = rag_service
+        logger.info("✅ RAG service initialized")
+
+        # Initialize AI service with dependencies
+        ai_service = AIService(
+            rag_service=rag_service,
+            ingres_service=ingres_service
+        )
         await ai_service.initialize()
         app.state.ai_service = ai_service
         logger.info("✅ AI service initialized")
@@ -43,6 +63,10 @@ async def lifespan(app: FastAPI):
     yield
 
     logger.info("🛑 Shutting down jalBuddy AI Backend...")
+    if rag_service:
+        await rag_service.cleanup()
+    if ingres_service:
+        await ingres_service.cleanup()
     if ai_service:
         await ai_service.cleanup()
     logger.info("👋 Shutdown complete")
