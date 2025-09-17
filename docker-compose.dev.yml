@@ -1,6 +1,55 @@
 version: '3.8'
 
 services:
+  # Zookeeper (Kafka dependency)
+  zookeeper:
+    image: bitnami/zookeeper:latest
+    container_name: jalbuddy-zookeeper
+    environment:
+      - ALLOW_ANONYMOUS_LOGIN=yes
+    ports:
+      - "2181:2181"
+    volumes:
+      - zookeeper_data:/bitnami
+    networks:
+      - jalbuddy-network
+    restart: unless-stopped
+
+  # Kafka Broker
+  kafka:
+    image: bitnami/kafka:latest
+    container_name: jalbuddy-kafka
+    environment:
+      - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
+      - KAFKA_CFG_LISTENERS=PLAINTEXT://:9092
+      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://kafka:9092
+      - ALLOW_PLAINTEXT_LISTENER=yes
+    ports:
+      - "9092:9092"
+    depends_on:
+      - zookeeper
+    volumes:
+      - kafka_data:/bitnami
+    networks:
+      - jalbuddy-network
+    restart: unless-stopped
+
+  # Weaviate (Vector DB alternative)
+  weaviate:
+    image: semitechnologies/weaviate:1.24.4
+    container_name: jalbuddy-weaviate
+    environment:
+      - QUERY_DEFAULTS_LIMIT=25
+      - AUTHENTICATION_ANONYMOUS_ACCESS_ENABLED=true
+      - PERSISTENCE_DATA_PATH=/var/lib/weaviate
+    ports:
+      - "8082:8080"
+    volumes:
+      - weaviate_data:/var/lib/weaviate
+    networks:
+      - jalbuddy-network
+    restart: unless-stopped
+
   # PostgreSQL Database
   postgres:
     image: postgres:15-alpine
@@ -146,3 +195,6 @@ volumes:
   redis_data:
   qdrant_data:
   ai_models:
+  zookeeper_data:
+  kafka_data:
+  weaviate_data:
