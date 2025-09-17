@@ -1,0 +1,144 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:15-alpine
+    container_name: jalbuddy-postgres
+    environment:
+      POSTGRES_DB: jalbuddy
+      POSTGRES_USER: jalbuddy_user
+      POSTGRES_PASSWORD: jalbuddy_dev_2025
+      POSTGRES_HOST_AUTH_METHOD: md5
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - jalbuddy-network
+    restart: unless-stopped
+
+  # Redis Cache
+  redis:
+    image: redis:7-alpine
+    container_name: jalbuddy-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - jalbuddy-network
+    restart: unless-stopped
+
+  # Vector Database (Qdrant for RAG)
+  qdrant:
+    image: qdrant/qdrant:latest
+    container_name: jalbuddy-qdrant
+    ports:
+      - "6333:6333"
+    volumes:
+      - qdrant_data:/qdrant/storage
+    networks:
+      - jalbuddy-network
+    restart: unless-stopped
+
+  # FastAPI Backend Service
+  backend:
+    build:
+      context: ./AI-BACKEND
+      dockerfile: Dockerfile.dev
+    container_name: jalbuddy-backend
+    environment:
+      - DATABASE_URL=postgresql://jalbuddy_user:jalbuddy_dev_2025@postgres:5432/jalbuddy
+      - REDIS_URL=redis://redis:6379
+      - QDRANT_URL=http://qdrant:6333
+      - ENVIRONMENT=development
+      - DEBUG=true
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./AI-BACKEND:/app
+      - ai_models:/app/models
+    depends_on:
+      - postgres
+      - redis
+      - qdrant
+    networks:
+      - jalbuddy-network
+    restart: unless-stopped
+    command: ["python", "main.py"]
+
+  # React Frontend Service  
+  frontend:
+    build:
+      context: ./FRONTEND
+      dockerfile: Dockerfile.dev
+    container_name: jalbuddy-frontend
+    environment:
+      - REACT_APP_API_URL=http://localhost:8000
+      - REACT_APP_ENVIRONMENT=development
+      - CHOKIDAR_USEPOLLING=true
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./FRONTEND:/app
+      - /app/node_modules
+    depends_on:
+      - backend
+    networks:
+      - jalbuddy-network
+    restart: unless-stopped
+
+  # Nginx Reverse Proxy (for production-like setup)
+  nginx:
+    image: nginx:alpine
+    container_name: jalbuddy-nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/dev.conf:/etc/nginx/nginx.conf
+      - ./nginx/ssl:/etc/nginx/ssl
+    depends_on:
+      - frontend
+      - backend
+    networks:
+      - jalbuddy-network
+    restart: unless-stopped
+
+  # Mock WhatsApp Webhook Server (for development)
+  whatsapp-mock:
+    build:
+      context: ./mock-services
+      dockerfile: Dockerfile.whatsapp
+    container_name: jalbuddy-whatsapp-mock
+    ports:
+      - "8080:8080"
+    networks:
+      - jalbuddy-network
+    restart: unless-stopped
+
+  # Mock INGRES API Server
+  ingres-mock:
+    build:
+      context: ./mock-services
+      dockerfile: Dockerfile.ingres
+    container_name: jalbuddy-ingres-mock
+    ports:
+      - "8081:8081"
+    environment:
+      - PORT=8081
+    networks:
+      - jalbuddy-network
+    restart: unless-stopped
+
+networks:
+  jalbuddy-network:
+    driver: bridge
+
+volumes:
+  postgres_data:
+  redis_data:
+  qdrant_data:
+  ai_models:
