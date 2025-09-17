@@ -9,6 +9,8 @@ import logging
 
 from config.settings import get_settings
 from api.routes import chat, health
+from api.routes import nlp_voice
+from api.routes import data_integration
 from services.ai_service_enhanced import EnhancedAIService
 
 logger = logging.getLogger(__name__)
@@ -69,11 +71,25 @@ def create_app() -> FastAPI:
             "endpoints": {
                 "docs": "/docs",
                 "health": "/api/health", 
-                "chat": "/api/chat/query"
+                "chat": "/api/chat/query",
+                "nlp": {
+                    "intent": "/api/nlp/intent",
+                    "entities": "/api/nlp/entities",
+                    "sentiment": "/api/nlp/sentiment",
+                    "asr": "/api/nlp/asr",
+                    "tts": "/api/nlp/tts"
+                },
+                "data": {
+                    "groundwater_level": "/api/data/groundwater/level",
+                    "dwlr_telemetry": "/api/data/dwlr/telemetry",
+                    "assessment_units": "/api/data/assessment/units"
+                }
             }
         }
 
-    app.include_router(health.router, prefix="/api", tags=["health"])
-    app.include_router(chat.router, prefix="/api/chat", tags=["chat"])
+    app.include_router(health.router, prefix="/api", tags=["health"]) 
+    app.include_router(chat.router, prefix="/api/chat", tags=["chat"]) 
+    app.include_router(nlp_voice.router, prefix="/api/nlp", tags=["nlp","voice"]) 
+    app.include_router(data_integration.router, prefix="/api/data", tags=["data"]) 
 
     return app

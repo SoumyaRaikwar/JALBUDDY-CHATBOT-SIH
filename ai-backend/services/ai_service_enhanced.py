@@ -73,7 +73,8 @@ class EnhancedAIService:
                     "type": "AI Model",
                     "model": llm_response.model_used,
                     "confidence": llm_response.confidence
-                }]
+                }],
+                "response_type": "text"
             }
 
             logger.info(f"✅ Query processed in {processing_time:.2f}s using {llm_response.model_used}")

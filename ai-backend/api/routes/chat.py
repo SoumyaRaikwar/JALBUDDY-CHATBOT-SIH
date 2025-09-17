@@ -4,7 +4,7 @@ Enhanced Chat Routes
 
 from fastapi import APIRouter, HTTPException, Depends, Request
 from pydantic import BaseModel
-from typing import Optional, Dict, Any
+from typing import Optional, Dict, Any, List
 import logging
 
 router = APIRouter()
@@ -22,6 +22,7 @@ class ChatResponse(BaseModel):
     model_used: str
     processing_time: float
     timestamp: str
+    response_type: str = "text"
 
 def get_ai_service(request: Request):
     """Get AI service from app state"""
@@ -52,7 +53,8 @@ async def process_chat_query(query: ChatQuery, ai_service = Depends(get_ai_servi
             confidence=result["confidence"], 
             model_used=result["model_used"],
             processing_time=result["processing_time"],
-            timestamp=result["timestamp"]
+            timestamp=result["timestamp"],
+            response_type=result.get("response_type", "text")
         )
 
     except Exception as e:

@@ -25,8 +25,20 @@
 ## 📚 API Endpoints
 
 ### Enhanced Chat
-- `POST /api/chat/query` - Real AI-powered responses
+- `POST /api/chat/query` - Real AI-powered responses (now returns response_type)
 - `GET /api/chat/examples` - Sample queries
+
+### NLP & Voice (stubs)
+- `POST /api/nlp/intent` - Intent classification
+- `POST /api/nlp/entities` - Entity extraction
+- `POST /api/nlp/sentiment` - Sentiment analysis
+- `POST /api/nlp/asr` - Whisper ASR proxy (stub)
+- `POST /api/nlp/tts` - TTS proxy (stub)
+
+### Data Integrations (stubs)
+- `GET /api/data/groundwater/level` - Groundwater level
+- `GET /api/data/dwlr/telemetry` - DWLR telemetry
+- `GET /api/data/assessment/units` - GEC-2015 assessment unit
 
 ### System Monitoring
 - `GET /api/health` - System health

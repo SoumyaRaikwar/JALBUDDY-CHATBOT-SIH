@@ -21,6 +21,13 @@ class Settings(BaseSettings):
     OPENAI_API_KEY: str = ""
     ANTHROPIC_API_KEY: str = ""
 
+    # Government/External APIs
+    INGRES_API: str = "https://ingres.iith.ac.in/api/v1"
+    WRIS_API: str = "https://indiawris.gov.in/api/v1"
+    CGWB_API: str = "https://cgwb.gov.in/api/v1"
+    BHASHINI_API: str = "https://bhashini.gov.in/ulca/apis/v0"
+    WHATSAPP_API: str = "https://graph.facebook.com/v18.0"
+
     # Database
     DATABASE_URL: str = "sqlite:///./jalbuddy.db"
 

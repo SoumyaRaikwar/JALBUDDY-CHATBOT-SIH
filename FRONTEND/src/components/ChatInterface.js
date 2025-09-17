@@ -7,6 +7,7 @@ import QuickActions from './QuickActions';
 import LoadingSkeleton from './LoadingSkeleton';
 import JalBuddyLogo from './JalBuddyLogo';
 import { demoIntents } from '../utils/demoData';
+import { API_BASE_URL } from '../config';
 import './ChatInterface.css';
 
 const ChatInterface = () => {
@@ -117,7 +118,7 @@ const ChatInterface = () => {
     
     try {
       // Call the backend API
-      const response = await fetch('http://localhost:8000/api/chat/query', {
+      const response = await fetch(`${API_BASE_URL}/api/chat/query`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -55,6 +55,10 @@ services:
       - QDRANT_URL=http://qdrant:6333
       - ENVIRONMENT=development
       - DEBUG=true
+      - INGRES_API=${INGRES_API:-https://ingres.iith.ac.in/api/v1}
+      - WRIS_API=${WRIS_API:-https://indiawris.gov.in/api/v1}
+      - CGWB_API=${CGWB_API:-https://cgwb.gov.in/api/v1}
+      - BHASHINI_API=${BHASHINI_API:-https://bhashini.gov.in/ulca/apis/v0}
     ports:
       - "8000:8000"
     volumes:
