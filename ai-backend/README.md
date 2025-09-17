@@ -35,10 +35,13 @@
 - `POST /api/nlp/asr` - Whisper ASR proxy (stub)
 - `POST /api/nlp/tts` - TTS proxy (stub)
 
-### Data Integrations (stubs)
-- `GET /api/data/groundwater/level` - Groundwater level
-- `GET /api/data/dwlr/telemetry` - DWLR telemetry
-- `GET /api/data/assessment/units` - GEC-2015 assessment unit
+### Data Integrations
+- `GET /api/data/groundwater/level` - Groundwater level (mock wired)
+- `GET /api/data/groundwater/quality` - Water quality (mock wired)
+- `GET /api/data/rainfall` - Rainfall and recharge (mock wired)
+- `GET /api/data/drilling/recommendation` - Drilling advisory (mock wired)
+- `GET /api/data/dwlr/telemetry` - DWLR telemetry (stub)
+- `GET /api/data/assessment/units` - GEC-2015 assessment unit (stub)
 
 ### System Monitoring
 - `GET /api/health` - System health

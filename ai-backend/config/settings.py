@@ -27,6 +27,8 @@ class Settings(BaseSettings):
     CGWB_API: str = "https://cgwb.gov.in/api/v1"
     BHASHINI_API: str = "https://bhashini.gov.in/ulca/apis/v0"
     WHATSAPP_API: str = "https://graph.facebook.com/v18.0"
+    # Local mock base (Flask mock-services)
+    MOCK_API_BASE: str = "http://localhost:8081/api"
 
     # Database
     DATABASE_URL: str = "sqlite:///./jalbuddy.db"
